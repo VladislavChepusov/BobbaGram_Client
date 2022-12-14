@@ -1,81 +1,59 @@
-import {Client } from '../LogicApi/ApiModels';
+import React, { Component, Key, ReactNode } from "react";
+import { Client, PostModel } from "../LogicApi/ApiModels";
 
-export const TestData = () => {
-   var jopa = new Client("https://localhost:7277");
-   var test =  jopa.getAllPosts(0,10);
-   //console.log(test);
-   //console.log("fgfff",test);
-  // let govno = test.then(function(response) { return response;})
-   //console.log("eeeee",govno);
-   return  (
-    <div>  
-      </div>
-    
-   );
+interface UserPosts {
+  items: any; //replace any with suitable type
+  error: any;
+  isLoaded: any;
+  // value: string;
 }
 
-
-
-
-async function getResult(){
-  var jopa = new Client("https://localhost:7277");
-   var result =  await jopa.getAllPosts(0,10);
-   
-  return result;
-}
-
-export async function DoTask(){
-  let data = await getResult();
-  console.log(data)
-  return <div>
-    {data[0].comments?.toString()}
-  </div>
-}
- 
- 
-
- 
-
-
-// Пример отправки  запроса:
-export async function GetData(url = '') {
-  // Default options are marked with *
-   var response =  fetch(url, {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      mode: 'no-cors', // no-cors, *cors, same-origin
-      cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        "Accept": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-    },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *client
-  }).then(function(response) {response.json()});
-  
-  return response; // parses JSON response into native JavaScript objects
+export default class TestData2 extends Component<{}, UserPosts> {
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+    this.state = {
+      error: null,
+      items: [],
+      isLoaded: false,
+    };
   }
 
-
-  export function api<T>(url: string): Promise<T> {
-
-    return fetch(url,
-      {
-       
-        method: "Get",
-       
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-    }
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
-        return response.json()
+  componentDidMount(): void {
+    var connect = new Client("https://localhost:7277");
+    var test = connect.getAllPosts(undefined, undefined);
+    test
+      .then((res) => {
+        this.setState({
+          items: res,
+          isLoaded: true,
+        });
       })
+      .catch((error) => {
+        this.setState({
+          error,
+          isLoaded: true,
+        });
+      });
+  }
+
+  render(): React.ReactNode {
+    const { error, items, isLoaded } = this.state;
+    if (error) {
+      return <div>Возникла ошибка {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Загрузка....</div>;
+    } else {
+      return (
+        <ul>
+          {items.map((_item: PostModel) => (
+            <li key={_item.id}>
+              {_item.id} <br></br>
+              {_item.author?.email} <br></br>
+              {_item.description}
+            </li>
+          ))}
+        </ul>
+      );
     }
-  
- 
+  }
+}
