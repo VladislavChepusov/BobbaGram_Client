@@ -589,7 +589,7 @@ export class Client {
             }
         };
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
+         return  this.http.fetch(url_, options_).then((_response: Response) => {
             return this.processGetAllPosts(_response);
         });
     }
