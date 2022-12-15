@@ -1,26 +1,25 @@
-import React from 'react';
-import Header from '../components/Header';
-import Content from '../components/content';
-import RightBar from '../components/rightbar';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
- 
-import Container from 'react-bootstrap/Container';
-import '../styles/app.css';
-import InstaHeader from '../components/OldHeader2'
+import React from "react";
+import Header from "../components/Header";
+import Content from "../components/content";
+import RightBar from "../components/rightbar";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+
+import Container from "react-bootstrap/Container";
+import "../styles/app.css";
+import InstaHeader from "../components/OldHeader2";
 
 export default class StartPage extends React.Component {
   render() {
     return (
       <>
-    
         <Header />
         <Row>
           <Col>
             <Container>
               <Container>
                 <div className="Main">
-
                   <Content
                     name="Ripu"
                     time="23min"
@@ -49,9 +48,7 @@ export default class StartPage extends React.Component {
             </Container>
           </Col>
 
-
-          
-       {/* <Col>
+          {/* <Col>
 
             <Container>
               <div className="RightMain">
@@ -59,9 +56,7 @@ export default class StartPage extends React.Component {
               </div>
             </Container>
             
-          </Col>*/ }  
-
-          
+          </Col>*/}
         </Row>
       </>
     );

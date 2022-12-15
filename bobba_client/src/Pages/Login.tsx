@@ -1,8 +1,8 @@
 
-import TestData2 from "./GetPost";
-import Header from "./Header";
+import TestData2 from "../components/GetPost";
+import Header from "../components/Header";
 import ReactDOM from "react-dom";
-import InstaHeader from "./OldHeader2";
+import InstaHeader from "../components/OldHeader2";
 
 export const Login = () => {
   return (

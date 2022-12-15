@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import StartPage from '../Pages/StartPage';
 
 import '../styles/app.css';
 
@@ -35,22 +36,23 @@ export default class Header extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
 
-                <Nav.Link href="#home">
+
+                <Nav.Link href="/">
                   <i className=" home icon big"></i>
                 </Nav.Link>
 
-                <Nav.Link href="#link">
+                <Nav.Link href="link">
                   <i class="plus square  icon big"></i>
                 </Nav.Link>
-                <Nav.Link href="#link">
+                <Nav.Link href="link">
                   <i class="star  icon big"></i>
                 </Nav.Link>
 
-                <Nav.Link href="#home">
+                <Nav.Link href="/">
                 <i className=" setting icon big"></i>
                 </Nav.Link>
                 
-                <Nav.Link href="#home">
+                <Nav.Link href="/">
                   <i className=" logout icon big"></i>
                 </Nav.Link>
 
