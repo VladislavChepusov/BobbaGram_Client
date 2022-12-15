@@ -52,7 +52,7 @@ export default class Header extends React.Component {
                 <i className=" setting icon big"></i>
                 </Nav.Link>
                 
-                <Nav.Link href="/">
+                <Nav.Link href="/login">
                   <i className=" logout icon big"></i>
                 </Nav.Link>
 

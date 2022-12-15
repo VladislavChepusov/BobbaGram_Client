@@ -6,15 +6,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 
+
 import Container from "react-bootstrap/Container";
 import "../styles/app.css";
-import InstaHeader from "../components/OldHeader2";
+
 
 export default class StartPage extends React.Component {
   render() {
     return (
       <>
         <Header />
+
+      
+        
         <Row>
           <Col>
             <Container>

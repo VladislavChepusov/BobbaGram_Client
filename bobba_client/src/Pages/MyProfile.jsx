@@ -17,7 +17,7 @@ export default class MyProfile extends React.Component {
 
           <Col>
             <Container>
- ЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖЖ
+            MyProfile
             </Container>
           </Col>
         </>
