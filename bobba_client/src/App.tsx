@@ -1,10 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Login } from './components/Login';
-
+ 
+import StartPage from './Pages/StartPage';
+ 
 function App() {
-  return (<Login/>);
+  return (<StartPage/>);
    
 }
 

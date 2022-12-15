@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+body{
+  overflow-x: hidden;
+  margin: 0;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.Col{
+  margin-bottom: 100px !important;
+}
+.bar {
+  height: 5em !important;
+  border-bottom: 1px solid #bbbfca;
+  font-family: 'Caveat', cursive;
+  width: 100vw;
+}
+.Main {
+  margin-top: 5em;
+  padding-top: 3em;
+  position: relative;
+  left: 20%;
+  padding-left: 1em;
+  top: 50% !important;
+}
+.RightMain {
+  position: relative;
+  left: 5vw;
+  margin-top: 5em;
+  padding-top: 3em;
+  position: relative;
+  padding-left: 1em;
+  top: 50% !important;
+}
+.linkBox {
+  display: inline !important;
+}
+
+.HeaderImage {
+  position: relative;
+  left: 1em;
+  top: -0.5em;
+}
+.RightImage {
+  
+  position: relative;
+  left: 1em;
+  top: -0.5em;
+}
+.RightImage img{
+  height: 6em !important;
+  width: 6em !important;
+  border-radius: 10em;
+}
+.ui.card {
+  width: 45vw !important;
+}
+.Storyimg {
+  padding: 0 !important;
+
+  height: 3em;
+  width: 3em;
+  border: 3px dashed #f05454;
+  border-radius: 2em;
+}
+.ContentImage {
+  position: relative;
+  left: -47%;
+  top: 0em;
+}
+small{
+  color:#898b8a;
+}
+.ContentImage img {
+  padding: 0 !important;
+  top: 40em !important;
+  height: 3em;
+  width: 3em;
+  border: 3px dashed #f05454;
+  border-radius: 2em;
+}
+.RightData{
+  margin-left: 2em;
+}
+.Footer{
+  padding: 3em;
+ margin-top: 7em !important;
+  width: 100vw;
+  background: black;
+}
+.FooterText{
+  color: white;
+  text-align: center;
+}
+@media (max-width: 1000px){
+  .RightMain{
+    display: none;
+  }
+  .ui.card {
+    width: 60vw !important;
+  }
+}

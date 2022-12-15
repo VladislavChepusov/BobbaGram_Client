@@ -1,12 +1,14 @@
-import { Header } from "./Header";
-import TestData2 from "./testData";
 
+import TestData2 from "./GetPost";
+import Header from "./Header";
 import ReactDOM from "react-dom";
+import InstaHeader from "./OldHeader2";
 
 export const Login = () => {
   return (
     <main>
       <Header />
+      <InstaHeader />
       <TestData2 />
 
       <form className="form-signin w-100 m-auto">
