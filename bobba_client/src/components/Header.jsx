@@ -17,7 +17,7 @@ export default class Header extends React.Component {
         <Container>
 
           <Row>
-            <Navbar.Brand href="#home">BobbaGram</Navbar.Brand>
+            <Navbar.Brand href="StartPage">BobbaGram</Navbar.Brand>
           </Row>
 
           <Row>
@@ -37,7 +37,7 @@ export default class Header extends React.Component {
               <Nav className="mr-auto">
 
 
-                <Nav.Link href="/">
+                <Nav.Link href="/StartPage">
                   <i className=" home icon big"></i>
                 </Nav.Link>
 
@@ -52,7 +52,7 @@ export default class Header extends React.Component {
                 <i className=" setting icon big"></i>
                 </Nav.Link>
                 
-                <Nav.Link href="/login">
+                <Nav.Link href="/">
                   <i className=" logout icon big"></i>
                 </Nav.Link>
 

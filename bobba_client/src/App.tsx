@@ -4,17 +4,19 @@ import './App.css';
  
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import StartPage from './Pages/StartPage';
-import MyProfile from './Pages/MyProfile';
+import NewLogin from './Pages/NewLogin';
 import NotFoundPage from './Pages/NotFoundPage';
-import  Login  from './Pages/Login';
+import  Login  from './Pages/OldLogin';
 import  Registration  from './Pages/Registration';
+import NewRegistration from './Pages/NewReg';
 function App() {
   return (
   <Router>
     <Routes>
-      <Route path='/' element = {<StartPage/>}/>
-      <Route path='/link' element = {<MyProfile/>}/>
-      <Route path='/login' element = {<Login/>}/>
+    <Route path='/oldlogin' element = {<Login/>}/>
+      <Route path='/StartPage' element = {<StartPage/>}/>
+      <Route path='/reg' element = {<NewRegistration/>}/>
+      <Route path='/' element = {<NewLogin/>}/>
       <Route path='/registration' element = {<Registration/>}/>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

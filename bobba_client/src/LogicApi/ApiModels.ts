@@ -4,6 +4,8 @@
 // </auto-generated>
 //----------------------
 
+import { Cookies } from "react-cookie";
+
 /* tslint:disable */
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
@@ -1315,10 +1317,14 @@ export class Client {
         let url_ = this.baseUrl + "/api/User/GetCurrentUser";
         url_ = url_.replace(/[?&]$/, "");
 
+
+        var cookies = new Cookies();
+       
         let options_: RequestInit = {
             method: "GET",
             headers: {
-                "Accept": "text/plain"
+                "Accept": "text/plain",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 

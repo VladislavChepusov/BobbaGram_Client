@@ -1,8 +1,10 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Client, TokenRequestModel } from "../LogicApi/AuthModels";
-import TestData2 from "../components/GetPost";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
+import { withCookies, Cookies } from 'react-cookie';
+
+
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -33,21 +35,30 @@ export default class Login extends React.Component {
     //alert('A name was submitted: ' + this.state.login + '|' + this.state.password);
 
     var connect = new Client("https://localhost:7277");
-    var data = new TokenRequestModel(); //tyt
+    var data = new TokenRequestModel(); 
     data.login = this.state.login;
     data.pass = this.state.password;
     var response = connect.token(data);
+    
+    
+    //cookies.set('name', name, { path: '/' });
 
     response
       .then((res) => {
-        console.log("kaef 1" + res.toJSON());
-        console.log("kaef 2" + res.accessToken);
-     
         if (res) {
-          console.log("работает" );  
+          let d = new Date();
+          var cookies = new Cookies();
+          d.setTime(d.getTime() + (60*1000)); // время жизни
+          //acces в куки\refresh  в localstorage
+          cookies.set("accessToken", "Bearer "+res.accessToken, {path: "/", expires: d});
+          localStorage.setItem("refreshToken",res.refreshToken);
+        
+          //console.log("eeeee " + localStorage.getItem("refreshToken"));
+
+
           this.setState({
             tokens: res,
-            redirect: true
+            redirect: true,
           });
         } else {
           this.setState({
@@ -56,6 +67,7 @@ export default class Login extends React.Component {
         }
       })
       .catch((error) => {
+       //console.log("!!!",error);
         if (error.status > 0) {
           this.setState({
             error: "Неверный логин или пароль!",
@@ -67,21 +79,15 @@ export default class Login extends React.Component {
         }
       });
 
-    
-    
-
     event.preventDefault();
-
-    
- 
   }
 
   render() {
     return (
       <main className="form-signin w-100 m-auto">
-        <TestData2 />
 
-        { this.state.redirect ? (<Navigate push to="/"/>) : null }
+
+        {this.state.redirect ? <Navigate push to="/StartPage" /> : null}
 
         <form onSubmit={this.handleSubmit}>
           <br></br>
@@ -90,7 +96,7 @@ export default class Login extends React.Component {
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
           <h5 className="text-danger">{this.state.error}</h5>
-  
+
           <div className="form-floating">
             <input
               type="email"

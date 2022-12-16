@@ -5,6 +5,7 @@ import RightBar from "../components/rightbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import TestData2 from "../components/GetPost";
 
 
 import Container from "react-bootstrap/Container";
@@ -16,7 +17,7 @@ export default class StartPage extends React.Component {
     return (
       <>
         <Header />
-
+        <TestData2 />
       
         
         <Row>
