@@ -45,18 +45,18 @@ export default class NewLogin extends React.Component {
     response
       .then((res) => {
         if (res) {
+
           let d = new Date();
           var cookies = new Cookies();
           d.setTime(d.getTime() + 60 * 1000); // время жизни
-          //acces в куки\refresh  в localstorage
+          // acces в куки\refresh  в localstorage
           cookies.set("accessToken", "Bearer " + res.accessToken, {
             path: "/",
             expires: d,
           });
           localStorage.setItem("refreshToken", res.refreshToken);
 
-          //console.log("eeeee " + localStorage.getItem("refreshToken"));
-
+        
           this.setState({
             tokens: res,
             redirect: true,

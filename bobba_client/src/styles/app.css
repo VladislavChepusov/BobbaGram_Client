@@ -104,7 +104,7 @@ small{
 
 
 
-/*Ниже все для формы логина*/
+/*Ниже все для формы логина и регистрации*/
 
 
 
@@ -113,11 +113,13 @@ a{color:#a600ff;}
 a:hover{color:#ff8585;} 
 .auth-wrapper {
     height: 100vh;
+    height: calc(var(--vh,1vh) * 100);
+    
     background-color: #ff8585; 
    background:linear-gradient(-45deg,#a600ff,#ff8585);
     background-attachment: fixed;
     background-size: cover;
-    height: calc(var(--vh,1vh) * 100);
+ 
     }
 .btn:hover {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
