@@ -1,6 +1,6 @@
 import React, { Component, Key, ReactNode } from "react";
 import { Client, PostModel } from "../LogicApi/ApiModels";
-import { withCookies, Cookies } from 'react-cookie';
+import { withCookies, Cookies } from "react-cookie";
 interface UserPosts {
   items: any; //replace any with suitable type
   error: any;
@@ -15,7 +15,6 @@ export default class TestData2 extends Component<{}, UserPosts> {
       error: null,
       items: [],
       isLoaded: false,
-
     };
   }
 
@@ -31,19 +30,15 @@ export default class TestData2 extends Component<{}, UserPosts> {
     */
     //cookies.set('name', name, { path: '/' });
 
-
-    
     var test2 = connect.getCurrentUser();
     test2
       .then((res) => {
-        console.log("user ok",  res); 
+        console.log("user ok", res);
       })
       .catch((error) => {
-console.log("usererror",  error); 
-        });
+        console.log("usererror", error);
+      });
 
-
-    
     test
       .then((res) => {
         this.setState({

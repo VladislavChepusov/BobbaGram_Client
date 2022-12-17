@@ -6,8 +6,8 @@ import StartPage from './Pages/StartPage';
 import NewLogin from './Pages/NewLogin';
 import NotFoundPage from './Pages/NotFoundPage';
 import  Login  from './Pages/OldLogin';
-import  Registration  from './Pages/Registration';
 import NewRegistration from './Pages/NewRegistration';
+import UserSetting from './Pages/UserSetting';
 function App() {
   return (
   <Router>
@@ -15,8 +15,9 @@ function App() {
     <Route path='/oldlogin' element = {<Login/>}/>
       <Route path='/StartPage' element = {<StartPage/>}/>
       <Route path='/registration' element = {<NewRegistration/>}/>
+
+      <Route path='/setting' element = {<UserSetting/>}/>
       <Route path='/' element = {<NewLogin/>}/>
-      <Route path='/reg' element = {<Registration/>}/>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </Router>

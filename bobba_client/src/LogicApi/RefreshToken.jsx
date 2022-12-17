@@ -1,6 +1,24 @@
 
 
 import { Client, RefreshTokenRequestModel } from "./AuthModels";
+import { Cookies } from "react-cookie";
+import {isTokenExpired} from "../LogicApi/TokenIsAlive";
+
+export const TokenMidelware = () => {
+  
+  var cookies = new Cookies();
+  if (isTokenExpired(cookies.get("accessToken")))
+  {
+  alert("токен не валиден")
+  RefreshToken(localStorage.getItem("refreshToken"))
+
+  }
+  else{
+      //alert("токен валиден") 
+  }
+}
+
+
 
 export const RefreshToken = (refreshtoken) => {
     var connect = new Client("https://localhost:7277");
@@ -17,9 +35,11 @@ export const RefreshToken = (refreshtoken) => {
           d.setTime(d.getTime() + (60*1000)); // время жизни
 
           //acces в куки\refresh  в localstorage
-          cookies.set("accessToken", "Bearer "+res.accessToken, {path: "/", expires: d});
+          cookies.set("accessToken", "Bearer "+res.accessToken, {
+            path: "/", 
+           // expires: d
+          });
           localStorage.setItem("refreshToken",res.refreshToken);
-      
         } 
       })
       

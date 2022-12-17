@@ -1,21 +1,31 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import StartPage from '../Pages/StartPage';
-
-import '../styles/app.css';
-
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { Client } from "../LogicApi/ApiModels";
+import "../styles/app.css";
+import { Cookies } from "react-cookie";
 export default class Header extends React.Component {
+  _LogOut(e) {
+    var connect = new Client("https://localhost:7277");
+    connect.logOut();
+    var cookies = new Cookies();
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+    cookies.set("accessToken", "Удален ", {
+      path: "/",
+      expires: date,
+    });
+    localStorage.removeItem("refreshToken");
+  }
+
   render() {
     return (
-      <Navbar className="bar" fixed="top" bg="light" expand="lg">
+      <Navbar className="bar auth-wrapper" fixed="top" bg="light" expand="lg">
         <Container>
-
           <Row>
             <Navbar.Brand href="StartPage">BobbaGram</Navbar.Brand>
           </Row>
@@ -35,24 +45,22 @@ export default class Header extends React.Component {
 
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-
-
                 <Nav.Link href="/StartPage">
                   <i className=" home icon big"></i>
                 </Nav.Link>
 
                 <Nav.Link href="link">
-                  <i class="plus square  icon big"></i>
+                  <i className="plus square  icon big"></i>
                 </Nav.Link>
                 <Nav.Link href="link">
-                  <i class="star  icon big"></i>
+                  <i className="star  icon big"></i>
                 </Nav.Link>
 
-                <Nav.Link href="/">
-                <i className=" setting icon big"></i>
+                <Nav.Link href="/setting">
+                  <i className=" setting icon big"></i>
                 </Nav.Link>
-                
-                <Nav.Link href="/">
+
+                <Nav.Link href="/" onClick={this._LogOut}>
                   <i className=" logout icon big"></i>
                 </Nav.Link>
 
@@ -63,20 +71,12 @@ export default class Header extends React.Component {
                       src="https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
                     />
                   </div>
-
                 </Nav.Link>
-
-          
-
               </Nav>
             </Navbar.Collapse>
           </Row>
-
-
-
         </Container>
       </Navbar>
     );
   }
 }
-

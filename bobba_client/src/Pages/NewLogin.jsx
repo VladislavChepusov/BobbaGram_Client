@@ -52,7 +52,7 @@ export default class NewLogin extends React.Component {
           // acces в куки\refresh  в localstorage
           cookies.set("accessToken", "Bearer " + res.accessToken, {
             path: "/",
-            expires: d,
+           // expires: d,
           });
           localStorage.setItem("refreshToken", res.refreshToken);
 

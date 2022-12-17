@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
-import '../styles/app.css';
+import "../styles/app.css";
 export default class Content extends React.Component {
-
   render(props) {
     return (
       <>
@@ -15,15 +14,11 @@ export default class Content extends React.Component {
             <img class="ui avatar image" src={this.props.user} />
             {this.props.name}
           </div>
-          
+
           <div class="image">
             <img className="Storyimg" src={this.props.url} />
-           
           </div>
 
-       
-        
-          
           <div class="content">
             <span class="right floated">
               <i class="bookmark outline icon big"></i>
@@ -43,5 +38,3 @@ export default class Content extends React.Component {
     );
   }
 }
-
-

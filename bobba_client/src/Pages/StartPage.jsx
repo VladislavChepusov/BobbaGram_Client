@@ -7,19 +7,15 @@ import Col from "react-bootstrap/Col";
 
 import TestData2 from "../components/GetPost";
 
-
 import Container from "react-bootstrap/Container";
 import "../styles/app.css";
-
 
 export default class StartPage extends React.Component {
   render() {
     return (
       <>
         <Header />
-        <TestData2 />
-      
-        
+
         <Row>
           <Col>
             <Container>

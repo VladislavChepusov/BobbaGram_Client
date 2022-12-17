@@ -85,7 +85,7 @@ export default class NewRegistration extends React.Component {
 
       response
         .then((res) => {
-          console.log("res !!!", res);
+          //console.log("res !!!", res);
           //if (res.ok){
           this.setState({
             redirect: true,
@@ -93,7 +93,7 @@ export default class NewRegistration extends React.Component {
           //}
         })
         .catch((error) => {
-          console.log("error !!!", error);
+          //console.log("error !!!", error);
           this.setState({
             redirect: false,
             error: error.response.replace(/"/g, ""),
