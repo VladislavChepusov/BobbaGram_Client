@@ -1,8 +1,10 @@
 import React from "react";
 import Header from "../components/Header";
+import ChangeAvatarSetting from "../components/ChangeAvatarSetting";
+import DeleteUserBtn from "../components/DeleteUserBtn";
 
-import { Client, ChangeUser } from "../LogicApi/ApiModels";
-
+import { Navigate } from "react-router-dom";
+import { Client, ChangeUser, ChangeUserPassword } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
 import "../styles/app.css";
 
@@ -16,6 +18,10 @@ export default class UserSetting extends React.Component {
       redirect: false,
       success: null,
 
+      oldPassword: "",
+      newPassword: "",
+      repeatPassword: "",
+
       email: "",
       username: "",
       password: "",
@@ -25,7 +31,7 @@ export default class UserSetting extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.changeUserData = this.changeUserData.bind(this);
-    //this.changeUserData = this.changeUserData(this);
+    this.changeUserPassword = this.changeUserPassword.bind(this);
   }
 
   handleInputChange(event) {
@@ -37,52 +43,87 @@ export default class UserSetting extends React.Component {
     });
   }
 
-  // Submit....
+  // Изменить инфу.
   changeUserData(event) {
-
+    TokenMidelware();
     if (!/[^\s]/gim.test(this.state.username)) {
-      
       this.setState({
         error: "Никнейм не может быть пустым",
       });
-    }
-    else{
+    } else {
       var connect = new Client("https://localhost:7277");
-    let dateB = new Date(this.state.date);
-    //let testDate = new Date("2022-12-17T10:25:40.059Z");
-    var chageData = new ChangeUser({
-      name: this.state.username,
-      email: this.state.email,
-      birthDate: dateB,
-      about: this.state.description,
-    });
-
-    var ChangeUserRequest = connect.changeMyAccount(chageData);
-    ChangeUserRequest.then((res) => {
-      console.log("res then !!!", res);
-      //if (res.ok){
-      this.setState({
-        success: "Изменения приняты!",
-        error: null,
+      let dateB = new Date(this.state.date);
+      //let testDate = new Date("2022-12-17T10:25:40.059Z");
+      var chageData = new ChangeUser({
+        name: this.state.username,
+        email: this.state.email,
+        birthDate: dateB,
+        about: this.state.description,
       });
-      //}
-    }).catch((error) => {
-      //console.log("error !!!", error);
-      this.setState({
-        success: null,
-        redirect: false,
-        error: error.response.replace(/"/g, ""),
-      });
-    });
 
+      var ChangeUserRequest = connect.changeMyAccount(chageData);
+      ChangeUserRequest.then((res) => {
+        console.log("res then !!!", res);
+        //if (res.ok){
+        this.setState({
+          success: "Изменения приняты!",
+          error: null,
+        });
+        //}
+      }).catch((error) => {
+        this.setState({
+          success: null,
+          //redirect: false,
+          error: error.response.replace(/"/g, ""),
+        });
+      });
     }
-
-    
-
     event.preventDefault();
   }
 
- 
+  // Изменить
+  changeUserPassword(event) {
+    //alert("ddddd")
+    TokenMidelware();
+
+    var regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$/;
+
+    if (!regularExpression.test(this.state.newPassword)) {
+      this.setState({
+        errorPass:
+          "Новый пароль недостаточно надежен. Необходимо сочетание заглавных букв со строчными, налчие цифр,количество символов от 8 до 15 ",
+      });
+    } else {
+      if (this.state.newPassword !== this.state.repeatPassword) {
+        this.setState({
+          errorPass: "Пароли не совпадают!",
+        });
+      } else {
+        var connect = new Client("https://localhost:7277");
+        var dataPass = new ChangeUserPassword({
+          oldPassword: this.state.oldPassword,
+          newPassword: this.state.newPassword,
+          retryPassword: this.state.repeatPassword,
+        });
+
+        var response = connect.changeMyPassword(dataPass);
+
+        response
+          .then((res) => {
+            this.setState({
+              redirect: true,
+            });
+          })
+          .catch((error) => {
+            this.setState({
+              redirect: false,
+              errorPass: error.response.replace(/"/g, ""),
+            });
+          });
+      }
+    }
+    event.preventDefault();
+  }
 
   // подгрузка старых данных
   componentDidMount(prevProps) {
@@ -100,7 +141,7 @@ export default class UserSetting extends React.Component {
       if (month < 10) month = "0" + month;
       var year = d.getFullYear();
       let normDate = year + "-" + month + "-" + day;
-      //description....
+
       this.setState({
         email: res.email,
         username: res.email,
@@ -116,21 +157,13 @@ export default class UserSetting extends React.Component {
     return (
       <>
         <Header />
+
+        {this.state.redirect ? <Navigate push to="/" /> : null}
         <br></br>
+
         <div className="container rounded bg-white mt-5 mb-5">
           <div className="row">
-            <div className="col-md-3 border-right">
-              <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img
-                  className="rounded-circle mt-5"
-                  width="150px"
-                  src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                />
-                <span className="font-weight-bold">Тут может быть кнопка</span>
-                <span className="text-black-50">или типо того</span>
-                <span></span>
-              </div>
-            </div>
+            <ChangeAvatarSetting />
 
             <div className="col-md-5 border-right">
               <div className="p-3 py-5">
@@ -220,30 +253,78 @@ export default class UserSetting extends React.Component {
 
             <div className="col-md-4">
               <div className="p-3 py-5">
-                <div className="d-flex justify-content-between align-items-center experience">
-                  <span>Изменить пароль</span>
-                  <span className="border px-3 p-1 add-experience">
-                    <i className="fa fa-plus"></i>&nbsp;Experience
-                  </span>
-                </div>
-                <div className="col-md-12">
-                  <label className="labels">Experience in Designing</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="experience"
-                    value=""
-                  />
-                </div>{" "}
                 <br></br>
-                <div className="col-md-12">
-                  <label className="labels">Additional Details</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="additional details"
-                    value=""
-                  />
+                <form onSubmit={this.changeUserPassword}>
+                  <div className="d-flex justify-content-between align-items-center experience">
+                    <span>
+                      <h5>Изменить пароль</h5>
+                    </span>
+
+                    <div className=" px-3 p-1 add-experience">
+                      <button
+                        className="btn btn-primary profile-button"
+                        type="Submit"
+                        //onClick={this.changeUserPassword}
+                      >
+                        Сохранить данные
+                      </button>
+                    </div>
+                  </div>
+                  <div className="text-danger">{this.state.errorPass}</div>
+                  <br></br>
+                  <div className="form-outline mb-3">
+                    <label className="form-label" htmlFor="oldPassword">
+                      Старый Пароль
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control form-control-lg"
+                      id="floatingPassword"
+                      value={this.state.oldPassword}
+                      onChange={this.handleInputChange}
+                      name="oldPassword"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-outline mb-3">
+                    <label className="form-label" htmlFor="newPassword">
+                      Новый пароль
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control form-control-lg"
+                      id="newPassword"
+                      value={this.state.newPassword}
+                      onChange={this.handleInputChange}
+                      name="newPassword"
+                      required
+                    />
+                  </div>
+                  <div className="form-outline mb-3">
+                    <label className="form-label" htmlFor="repeatPassword">
+                      Повторите пароль
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control form-control-lg"
+                      id="repeatPassword"
+                      value={this.state.repeatPassword}
+                      onChange={this.handleInputChange}
+                      name="repeatPassword"
+                      required
+                    />
+                  </div>
+                </form>
+              </div>
+              <br></br>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm"></div>
+                  <div class="col-sm">
+                    <DeleteUserBtn />
+                  </div>
+                  <div class="col-sm"></div>
                 </div>
               </div>
             </div>

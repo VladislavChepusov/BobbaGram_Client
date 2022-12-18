@@ -1130,10 +1130,11 @@ export class Client {
     deleteMyAccount(): Promise<void> {
         let url_ = this.baseUrl + "/api/User/DeleteMyAccount";
         url_ = url_.replace(/[?&]$/, "");
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             method: "DELETE",
             headers: {
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -1239,12 +1240,13 @@ export class Client {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             body: content_,
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
