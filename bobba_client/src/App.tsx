@@ -8,6 +8,7 @@ import NotFoundPage from './Pages/NotFoundPage';
 import  Login  from './Pages/OldLogin';
 import NewRegistration from './Pages/NewRegistration';
 import UserSetting from './Pages/UserSetting';
+import UserProfilePage from './Pages/UserProfilePage';
 function App() {
   return (
   <Router>
@@ -15,7 +16,7 @@ function App() {
     <Route path='/oldlogin' element = {<Login/>}/>
       <Route path='/StartPage' element = {<StartPage/>}/>
       <Route path='/registration' element = {<NewRegistration/>}/>
-
+      <Route path='/profile' element = {<UserProfilePage/>}/>
       <Route path='/setting' element = {<UserSetting/>}/>
       <Route path='/' element = {<NewLogin/>}/>
       <Route path="*" element={<NotFoundPage />} />

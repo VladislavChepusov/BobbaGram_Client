@@ -63,15 +63,18 @@ export default class ChangeAvatarSetting extends React.Component {
       <div className="col-md-3 border-right">
         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
           <img
-            className="rounded-circle mt-5"
-            width="150px"
-            height="150px"
+            className="rounded-circle img-fluid img-thumbnail mt-4 mb-2"
+            //width="150px"
+           // height="150px"
+            style={{ width: "150px",height:"150px", zIndex: 1 }}
             src={
               this.props.avaratlink !== null
                 ? this.props.avaratlink
                 : this.state.avatar
             }
           />
+
+          
           <br></br>
           <br></br>
           <div className="text-warning">{this.props.avatar}</div>

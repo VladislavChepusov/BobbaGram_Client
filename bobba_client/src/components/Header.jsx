@@ -10,16 +10,17 @@ import "../styles/app.css";
 import { Cookies } from "react-cookie";
 export default class Header extends React.Component {
 
+  /*
   constructor(props) {
     super(props);
 
     this.state = {
       error: null,
       success: null,
-      avatar:"https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
     };
   }
 
+*/
 
 
   _LogOut(e) {
@@ -42,9 +43,8 @@ export default class Header extends React.Component {
           <Row>
             <Navbar.Brand href="StartPage">BobbaGram</Navbar.Brand>
           </Row>
-
           <Row>
-            <Form inline>
+            <Form inline = "true">
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -52,7 +52,6 @@ export default class Header extends React.Component {
               />
             </Form>
           </Row>
-
           <Row className="last-Row">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
@@ -63,7 +62,7 @@ export default class Header extends React.Component {
                 </Nav.Link>
 
                 <Nav.Link href="link">
-                  <i className="plus square  icon big"></i>
+                  <i className="plus square icon big"></i>
                 </Nav.Link>
                 <Nav.Link href="link">
                   <i className="star  icon big"></i>
@@ -73,18 +72,14 @@ export default class Header extends React.Component {
                   <i className=" setting icon big"></i>
                 </Nav.Link>
 
+                <Nav.Link className="headerLink" href="/profile">
+                  <i className=" user icon big"></i>
+                </Nav.Link>
+
                 <Nav.Link href="/" onClick={this._LogOut}>
                   <i className=" logout icon big"></i>
                 </Nav.Link>
 
-                <Nav.Link className="headerLink" href="#link">
-                  <div className="HeaderImage">
-                    <img
-                      className="Storyimg"
-                      src={this.state.avatar}
-                    />
-                  </div>
-                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Row>
