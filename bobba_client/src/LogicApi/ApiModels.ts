@@ -114,9 +114,11 @@ export class Client {
             url_ += "download=" + encodeURIComponent("" + download) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
+        var cookies = new Cookies();
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Authorization": cookies.get("accessToken"),
             }
         };
 

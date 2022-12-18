@@ -14,13 +14,11 @@ export default class ChangeAvatarSetting extends React.Component {
       avatar:
         "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg",
     };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fileInput = React.createRef();
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     TokenMidelware();
     if (this.fileInput.current.files[0]) {
       var connect = new Client("https://localhost:7277");
@@ -57,6 +55,7 @@ export default class ChangeAvatarSetting extends React.Component {
         });
       });
     }
+    event.preventDefault();
   }
 
   render() {
@@ -66,18 +65,24 @@ export default class ChangeAvatarSetting extends React.Component {
           <img
             className="rounded-circle mt-5"
             width="150px"
-            src={this.state.avatar}
+            height="150px"
+            src={
+              this.props.avaratlink !== null
+                ? this.props.avaratlink
+                : this.state.avatar
+            }
           />
           <br></br>
           <br></br>
-
+          <div className="text-warning">{this.props.avatar}</div>
           <div className="text-danger">{this.state.error}</div>
           <div className="text-success">{this.state.success}</div>
+
           <form onSubmit={this.handleSubmit} encType="multipart/form-data">
             <input
               type="file"
               ref={this.fileInput}
-              class="form-control-file btn-info"
+              className="form-control-file btn-info"
               accept="image/* ,video/*"
             />
 

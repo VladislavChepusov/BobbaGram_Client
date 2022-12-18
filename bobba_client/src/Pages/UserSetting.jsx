@@ -23,6 +23,7 @@ export default class UserSetting extends React.Component {
       repeatPassword: "",
 
       email: "",
+      avaratlink :null,
       username: "",
       password: "",
       retrypassword: "",
@@ -127,7 +128,6 @@ export default class UserSetting extends React.Component {
 
   // подгрузка старых данных
   componentDidMount(prevProps) {
-    // alert("отстой" );
     // Рефрешы токенов
     TokenMidelware();
 
@@ -143,6 +143,8 @@ export default class UserSetting extends React.Component {
       let normDate = year + "-" + month + "-" + day;
 
       this.setState({
+        avaratlink: (res.avatarLink !== null) ? 'https://localhost:7277' + res.avatarLink : res.avatarLink,
+        //avaratlink: 'https://localhost:7277' +res.avatarLink,  
         email: res.email,
         username: res.email,
         date: normDate,
@@ -163,8 +165,7 @@ export default class UserSetting extends React.Component {
 
         <div className="container rounded bg-white mt-5 mb-5">
           <div className="row">
-            <ChangeAvatarSetting />
-
+            <ChangeAvatarSetting  avaratlink={this.state.avaratlink} />
             <div className="col-md-5 border-right">
               <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center mb-3">
