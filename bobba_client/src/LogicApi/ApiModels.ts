@@ -153,12 +153,14 @@ export class Client {
             throw new Error("The parameter 'files' cannot be null.");
         else
             files.forEach(item_ => content_.append("files", item_.data, item_.fileName ? item_.fileName : "files") );
-
+        
+        var cookies = new Cookies();
         let options_: RequestInit = {
             body: content_,
             method: "POST",
             headers: {
-                "Accept": "text/plain"
+                "Accept": "text/plain",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -1364,12 +1366,13 @@ export class Client {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             body: content_,
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 

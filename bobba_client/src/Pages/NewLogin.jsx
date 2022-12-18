@@ -45,18 +45,16 @@ export default class NewLogin extends React.Component {
     response
       .then((res) => {
         if (res) {
-
           let d = new Date();
           var cookies = new Cookies();
           d.setTime(d.getTime() + 60 * 1000); // время жизни
           // acces в куки\refresh  в localstorage
           cookies.set("accessToken", "Bearer " + res.accessToken, {
             path: "/",
-           // expires: d,
+            // expires: d,
           });
           localStorage.setItem("refreshToken", res.refreshToken);
 
-        
           this.setState({
             tokens: res,
             redirect: true,
@@ -102,10 +100,11 @@ export default class NewLogin extends React.Component {
         <div className="d-none d-sm-flex col-sm-6 col-lg-8 align-items-center p-5">
           <div className="align-items-start d-lg-flex flex-column offset-lg-2 text-white">
             <img src="" className="mb-3" />
-            <h1 className="d-flex">Привет 👋 Добро пожаловать, снова!</h1>
+            <h1 className="d-flex">👋 Добро пожаловать в BobbaGram, снова!</h1>
+
             <p>
-              BobbaGram - Потому что твои новые друзья Иран и Мозамбик!!{" "}
-              <br></br> ыыыыыы
+              Фотография, которую вы сделали с помощью камеры – это воображение,
+              которое вы формируете из реальности. <br></br>
             </p>
           </div>
         </div>

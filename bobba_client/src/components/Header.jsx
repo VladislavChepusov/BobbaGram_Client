@@ -9,6 +9,19 @@ import { Client } from "../LogicApi/ApiModels";
 import "../styles/app.css";
 import { Cookies } from "react-cookie";
 export default class Header extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: null,
+      success: null,
+      avatar:"https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
+    };
+  }
+
+
+
   _LogOut(e) {
     var connect = new Client("https://localhost:7277");
     connect.logOut();
@@ -68,7 +81,7 @@ export default class Header extends React.Component {
                   <div className="HeaderImage">
                     <img
                       className="Storyimg"
-                      src="https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
+                      src={this.state.avatar}
                     />
                   </div>
                 </Nav.Link>
