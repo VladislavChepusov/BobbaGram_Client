@@ -13,7 +13,7 @@ export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: null,
+      search: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.SearchUser = this.SearchUser.bind(this);

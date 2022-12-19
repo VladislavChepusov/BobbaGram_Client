@@ -1,10 +1,11 @@
 import React from "react";
 import Header from "../components/Header";
 import Gallary from "../components/Gallary";
-
+import SubscribersUserPanel from "../components/SubscribersUserPanel";
+import SubscriptionUserPanel from "../components/SubscriptionUserPanel";
 import NotFoundPage from "./NotFoundPage";
 import "../styles/app.css";
-import { Client, ChangeUser, ChangeUserPassword } from "../LogicApi/ApiModels";
+import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
 
 export default class UserPage extends React.Component {
@@ -20,18 +21,17 @@ export default class UserPage extends React.Component {
       description: null,
       date: null,
       PostCount: null,
-
-
-      
+      id: null,
     };
   }
 
-  // подгрузка старых данных
+  // подгрузка данных
   componentDidMount(prevProps) {
     // Рефрешы токенов
     TokenMidelware();
     var connect = new Client("https://localhost:7277");
     var UserData = connect.getUserByName(this.props.name);
+
     UserData.then((res) => {
       let d = new Date(res.birthDate);
       var day = d.getDate();
@@ -50,9 +50,11 @@ export default class UserPage extends React.Component {
         date: normDate,
         description: res.about,
         PostCount: res.postsCount,
+        id: res.id,
         isLoaded: true,
         error: false,
       });
+      return res.id;
     }).catch((error) => {
       console.log("usererror", error);
       this.setState({
@@ -110,14 +112,16 @@ export default class UserPage extends React.Component {
                           <p className="mb-1 h5">{this.state.PostCount}</p>
                           <p className="small text-muted mb-0">Постов</p>
                         </div>
-                        <div className="px-3">
-                          <p className="mb-1 h5">2</p>
-                          <p className="small text-muted mb-0">Подписок</p>
-                        </div>
-                        <div>
-                          <p className="mb-1 h5">1</p>
+
+                        <SubscriptionUserPanel user_id={this.state.id} />
+                        <SubscribersUserPanel user_id={this.state.id} />
+
+                        {/*    <div>
+                          <p className="mb-1 h5">
+                            11
+                          </p>
                           <p className="small text-muted mb-0">Подписчиков</p>
-                        </div>
+                        </div>*/}
                       </div>
                     </div>
 
@@ -137,9 +141,7 @@ export default class UserPage extends React.Component {
                         </div>
                       </div>
 
-             
-            <Gallary/>
-
+                      <Gallary />
                     </div>
                   </div>
                 </div>
