@@ -4,6 +4,7 @@
 - React
 - bootstrap 
 - nswag (Для генерации по сваггеру логики)
+- Node js
 
 
 

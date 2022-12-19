@@ -146,7 +146,7 @@ export default class UserSetting extends React.Component {
         avaratlink: (res.avatarLink !== null) ? 'https://localhost:7277' + res.avatarLink : res.avatarLink,
         //avaratlink: 'https://localhost:7277' +res.avatarLink,  
         email: res.email,
-        username: res.email,
+        username: res.name,
         date: normDate,
         description: res.about,
       });

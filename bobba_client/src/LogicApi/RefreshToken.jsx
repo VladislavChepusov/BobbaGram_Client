@@ -14,7 +14,7 @@ export const TokenMidelware = () => {
 
   }
   else{
-      alert("токен валиден") 
+      //alert("токен валиден") 
   }
 }
 

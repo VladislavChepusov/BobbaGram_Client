@@ -15,6 +15,7 @@ export const isTokenExpired = (token: string | null): boolean => {
   try {
     const tokenInfo = token.split(".")[1];
     const tokenInfoDecoded = window.atob(tokenInfo);
+    
     const { exp, iat }: IAuthTokenInfo = JSON.parse(tokenInfoDecoded);
     const tokenLeftTime = exp - getUnixTime();
     const minLifeTimeForUpdate = (exp - iat) * LIFE_TIME_TO_UPDATE_MULTIPLIER;
