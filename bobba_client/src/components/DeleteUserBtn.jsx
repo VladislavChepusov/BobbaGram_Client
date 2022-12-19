@@ -17,9 +17,8 @@ export default class DeleteUserBtn extends React.Component {
     this.DeleteMe = this.DeleteMe.bind(this);
   }
   DeleteMe(event) {
-
     TokenMidelware();
-    
+
     var connect = new Client("https://localhost:7277");
     connect
       .deleteMyAccount()

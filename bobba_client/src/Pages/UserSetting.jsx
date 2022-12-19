@@ -6,6 +6,7 @@ import DeleteUserBtn from "../components/DeleteUserBtn";
 import { Navigate } from "react-router-dom";
 import { Client, ChangeUser, ChangeUserPassword } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
+import { RefreshToken } from "../LogicApi/RefreshToken";
 import "../styles/app.css";
 
 export default class UserSetting extends React.Component {
@@ -23,7 +24,7 @@ export default class UserSetting extends React.Component {
       repeatPassword: "",
 
       email: "",
-      avaratlink :null,
+      avaratlink: null,
       username: "",
       password: "",
       retrypassword: "",
@@ -64,13 +65,11 @@ export default class UserSetting extends React.Component {
 
       var ChangeUserRequest = connect.changeMyAccount(chageData);
       ChangeUserRequest.then((res) => {
-        console.log("res then !!!", res);
-        //if (res.ok){
+        RefreshToken(localStorage.getItem("refreshToken"));
         this.setState({
           success: "Изменения приняты!",
           error: null,
         });
-        //}
       }).catch((error) => {
         this.setState({
           success: null,
@@ -79,6 +78,7 @@ export default class UserSetting extends React.Component {
         });
       });
     }
+
     event.preventDefault();
   }
 
@@ -86,9 +86,7 @@ export default class UserSetting extends React.Component {
   changeUserPassword(event) {
     //alert("ddddd")
     TokenMidelware();
-
     var regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$/;
-
     if (!regularExpression.test(this.state.newPassword)) {
       this.setState({
         errorPass:
@@ -106,9 +104,7 @@ export default class UserSetting extends React.Component {
           newPassword: this.state.newPassword,
           retryPassword: this.state.repeatPassword,
         });
-
         var response = connect.changeMyPassword(dataPass);
-
         response
           .then((res) => {
             this.setState({
@@ -143,8 +139,11 @@ export default class UserSetting extends React.Component {
       let normDate = year + "-" + month + "-" + day;
 
       this.setState({
-        avaratlink: (res.avatarLink !== null) ? 'https://localhost:7277' + res.avatarLink : res.avatarLink,
-        //avaratlink: 'https://localhost:7277' +res.avatarLink,  
+        avaratlink:
+          res.avatarLink !== null
+            ? "https://localhost:7277" + res.avatarLink
+            : res.avatarLink,
+        //avaratlink: 'https://localhost:7277' +res.avatarLink,
         email: res.email,
         username: res.name,
         date: normDate,
@@ -159,13 +158,12 @@ export default class UserSetting extends React.Component {
     return (
       <>
         <Header />
-
         {this.state.redirect ? <Navigate push to="/" /> : null}
         <br></br>
 
         <div className="container rounded bg-white mt-5 mb-5">
           <div className="row">
-            <ChangeAvatarSetting  avaratlink={this.state.avaratlink} />
+            <ChangeAvatarSetting avaratlink={this.state.avaratlink} />
             <div className="col-md-5 border-right">
               <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center mb-3">

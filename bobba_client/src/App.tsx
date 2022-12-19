@@ -1,29 +1,27 @@
-import React from 'react';
-import './App.css';
- 
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import StartPage from './Pages/StartPage';
-import NewLogin from './Pages/NewLogin';
-import NotFoundPage from './Pages/NotFoundPage';
-import  Login  from './Pages/OldLogin';
-import NewRegistration from './Pages/NewRegistration';
-import UserSetting from './Pages/UserSetting';
-import UserProfilePage from './Pages/UserProfilePage';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import StartPage from "./Pages/StartPage";
+import NewLogin from "./Pages/NewLogin";
+import NotFoundPage from "./Pages/NotFoundPage";
+
+import NewRegistration from "./Pages/NewRegistration";
+import UserSetting from "./Pages/UserSetting";
+import { User } from "./Pages/User";
+
 function App() {
   return (
-  <Router>
-    <Routes>
-    <Route path='/oldlogin' element = {<Login/>}/>
-      <Route path='/StartPage' element = {<StartPage/>}/>
-      <Route path='/registration' element = {<NewRegistration/>}/>
-      <Route path='/profile' element = {<UserProfilePage/>}/>
-      <Route path='/setting' element = {<UserSetting/>}/>
-      <Route path='/' element = {<NewLogin/>}/>
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  </Router>
+    <Router>
+      <Routes>
+        <Route path="/StartPage" element={<StartPage />} />
+        <Route path="/registration" element={<NewRegistration />} />
+        <Route path="/setting" element={<UserSetting />} />
+        <Route path="/" element={<NewLogin />} />
+        <Route path="/user/:name" element={<User />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
   );
-   
 }
 
 export default App;
