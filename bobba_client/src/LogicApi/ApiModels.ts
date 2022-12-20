@@ -1,3 +1,4 @@
+
 import { Cookies } from "react-cookie";
 
 
@@ -25,10 +26,11 @@ export class Client {
         else if (download !== undefined)
             url_ += "download=" + encodeURIComponent("" + download) + "&";
         url_ = url_.replace(/[?&]$/, "");
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -66,10 +68,11 @@ export class Client {
         else if (download !== undefined)
             url_ += "download=" + encodeURIComponent("" + download) + "&";
         url_ = url_.replace(/[?&]$/, "");
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -145,12 +148,13 @@ export class Client {
             throw new Error("The parameter 'files' cannot be null.");
         else
             files.forEach(item_ => content_.append("files", item_.data, item_.fileName ? item_.fileName : "files") );
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             body: content_,
             method: "POST",
             headers: {
-                "Accept": "text/plain"
+                "Accept": "text/plain",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -240,6 +244,7 @@ export class Client {
             headers: {
                 "Accept": "text/plain",
                 "Authorization": cookies.get("accessToken"),
+
             }
         };
 
@@ -584,11 +589,12 @@ export class Client {
         else if (take !== undefined)
             url_ += "take=" + encodeURIComponent("" + take) + "&";
         url_ = url_.replace(/[?&]$/, "");
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             method: "GET",
             headers: {
-                "Accept": "text/plain"
+                "Accept": "text/plain",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -1331,11 +1337,12 @@ export class Client {
     getUsers(): Promise<UserAvatarModel[]> {
         let url_ = this.baseUrl + "/api/User/GetUsers";
         url_ = url_.replace(/[?&]$/, "");
-
+        var cookies = new Cookies();
         let options_: RequestInit = {
             method: "GET",
             headers: {
-                "Accept": "text/plain"
+                "Accept": "text/plain",
+                "Authorization": cookies.get("accessToken"),
             }
         };
 
@@ -2242,6 +2249,7 @@ export interface IPostLike {
 export class PostModel implements IPostModel {
     id?: string;
     description?: string | undefined;
+    created?: Date;
     author?: UserAvatarModel;
     contents?: AttachExternalModel[] | undefined;
     comments?: GetCommentsRequestModel[] | undefined;
@@ -2260,6 +2268,7 @@ export class PostModel implements IPostModel {
         if (_data) {
             this.id = _data["id"];
             this.description = _data["description"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.author = _data["author"] ? UserAvatarModel.fromJS(_data["author"]) : <any>undefined;
             if (Array.isArray(_data["contents"])) {
                 this.contents = [] as any;
@@ -2286,6 +2295,7 @@ export class PostModel implements IPostModel {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["description"] = this.description;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["author"] = this.author ? this.author.toJSON() : <any>undefined;
         if (Array.isArray(this.contents)) {
             data["contents"] = [];
@@ -2305,6 +2315,7 @@ export class PostModel implements IPostModel {
 export interface IPostModel {
     id?: string;
     description?: string | undefined;
+    created?: Date;
     author?: UserAvatarModel;
     contents?: AttachExternalModel[] | undefined;
     comments?: GetCommentsRequestModel[] | undefined;

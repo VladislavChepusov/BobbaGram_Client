@@ -55,7 +55,7 @@ export default class Header extends React.Component {
       <Navbar className="bar auth-wrapper" fixed="top" bg="light" expand="lg">
         <Container>
           <Row>
-            <Navbar.Brand href="StartPage">BobbaGram</Navbar.Brand>
+            <Navbar.Brand href="/StartPage">BobbaGram</Navbar.Brand>
           </Row>
           <Row>
             <Form onSubmit={this.SearchUser}>

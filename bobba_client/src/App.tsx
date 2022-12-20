@@ -8,6 +8,7 @@ import NotFoundPage from "./Pages/NotFoundPage";
 import NewRegistration from "./Pages/NewRegistration";
 import UserSetting from "./Pages/UserSetting";
 import { User } from "./Pages/User";
+import { Post } from "./Pages/Post";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path="/setting" element={<UserSetting />} />
         <Route path="/" element={<NewLogin />} />
         <Route path="/user/:name" element={<User />} />
+
+        <Route path="/post/:id" element={<Post/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import UserPage from './UserPage';
+import PostPage from './PostPage';
 
-export const User = () => {
+
+export const Post = () => {
   const {id} = useParams();
-  return ( <div/>
- // return ( <UserPage id = {id}/>
+  //return ( <div>{id}</div>
+ return ( <PostPage id = {id}/>
   );
 };
  
