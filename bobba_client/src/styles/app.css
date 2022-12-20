@@ -60,7 +60,7 @@ body{
 
   height: 3em;
   width: 3em;
-  border: 3px dashed #f05454;
+  border: 3px solid #000000;
   border-radius: 2em;
 }
 .ContentImage {
@@ -261,6 +261,15 @@ a:hover{color:#ff8585;}
 }
 
 /* xddd*/
+li {
+  list-style-type: none;
+  /* Убираем маркеры */
+}
 
- 
+ul {
+  margin-left: 0;
+  /* Отступ слева в браузере IE и Opera */
+  padding-left: 0;
+  /* Отступ слева в браузере Firefox, Safari, Chrome */
+}
 

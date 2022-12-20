@@ -87,13 +87,14 @@ export default class UserPage extends React.Component {
                       className="rounded-top text-white d-flex flex-row"
                       style={{ backgroundColor: "#000", height: "200px" }}
                     >
-                      <div
-                        className="ms-4 mt-5 d-flex flex-column"
-                        style={{ width: "150px" }}
-                      >
+                      <div className="ms-4 mt-5 d-flex flex-column">
                         <img
                           className="rounded-circle img-fluid img-thumbnail mt-4 mb-2"
+                          //width="150px"
+                          // height="150px"
                           style={{ width: "150px", height: "150px", zIndex: 1 }}
+                          //  className="rounded-circle img-fluid img-thumbnail mt-4 mb-2"
+                          // style={{ width: "150px", height: "150px", zIndex: 1 }}
                           src={this.state.avaratlink}
                         />
                       </div>

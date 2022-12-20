@@ -8,6 +8,9 @@ export default class SubscribersUserPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false,
+      isLoaded: false,
+
       Subscribers: [],
     };
   }
@@ -23,6 +26,8 @@ export default class SubscribersUserPanel extends React.Component {
         console.log("resSubscribers " + Subscribers.length);
         this.setState({
           Subscribers,
+          isLoaded: true,
+          error: false,
         });
       })
       .catch((errorSubscribers) => {
@@ -35,60 +40,133 @@ export default class SubscribersUserPanel extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        {" "}
-        <div>
-          <p className="mb-1 h5">{this.state.Subscribers.length}</p>
-          <p className="small text-muted mb-0">Подписчиков</p>
-        </div>
-      </>
-    );
+    if (this.state.error) {
+      return (
+        <>
+          <div data-toggle="modal" data-target="#exampleModalLong2">
+            <p className="mb-1 h5">0</p>
+            <p className="small text-muted mb-0">Подписчиков</p>
+          </div>
+        </>
+      );
+    } else if (!this.state.isLoaded) {
+      return <div>Загрузка....</div>;
+    } else {
+      return (
+        <>
+          {" "}
+          <div data-toggle="modal" data-target="#exampleModalLong2">
+            <p className="mb-1 h5">{this.state.Subscribers.length}</p>
+            <p className="small text-muted mb-0">Подписчиков</p>
+          </div>
+          <div
+            className="modal fade"
+            id="exampleModalLong2"
+            tabIndex="2"
+            role="dialog"
+            aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLongTitle">
+                    Список подписчиков
+                  </h5>
+
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                {this.state.Subscribers.length > 0 && (
+                  <ul className="list-group  m-15">
+                    {this.state.Subscribers.map((_item) => (
+                      <a
+                        href={"/user/" + _item.user.name}
+                        className=" nav-link  link-dark  "
+                      >
+                        <br></br>
+                        <li key={_item.user.name}>
+                          <div className="container border-bottom border-secondary  border-3 rounded-1 rounded-pill">
+                            <div className="row">
+                              <div className="col-2">
+                                <img
+                                  className="Storyimg "
+                                  src={
+                                    _item.user.avatarLink !== null
+                                      ? "https://localhost:7277" +
+                                        _item.user.avatarLink
+                                      : "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
+                                  }
+                                />
+                              </div>
+                              <div className="col-6 ">
+                                <div
+                                  className="float-left fs-5"
+                                  style={{
+                                    position: "absolute",
+                                    bottom: "25%",
+                                  }}
+                                >
+                                  {_item.user.name}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </a>
+                    ))}
+
+                    <br></br>
+                  </ul>
+                )}
+
+                {/*
+
+              <div className="modal-body">
+                <ul className="float-left list-group ">
+                  {this.state.Subscribers.map((_item) => (
+                    <li key={_item.user.name} className="list-group-item ">
+                      <a
+                        href={"/user/" + _item.user.name}
+                        className="link-dark"
+                      >
+                        <div class="container float-left">
+                          <div class="row">
+                            <div class="col-sm float-left">
+                              <img
+                                className="Storyimg"
+                                src={
+                                  _item.user.avatarLink !== null
+                                    ? "https://localhost:7277" +
+                                      _item.user.avatarLink
+                                    : "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
+                                }
+                              />
+                            </div>
+                            <div class="col-sm">{_item.user.name}</div>
+                            <div class="col-sm"> </div>
+                          </div>
+                        </div>
+                      </a>
+                      <br/>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              */}
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
   }
 }
-
-/*
-
-
-    .then((id) =>{
-
-          var requestSubscription = connect.getSubscription(id);
-          requestSubscription
-          .then((subscriptions)=>{
-            console.log("resSubscription "+ subscriptions[0].userId);
-            console.log("resSubscription "+ subscriptions.length);
-            this.setState({
-              subscriptions
-            });
-          })
-          .catch((errorSubscriptions) =>{
-            console.log("errorSubscriptions", errorSubscriptions);
-            this.setState({
-              error: true,
-              isLoaded: true,
-            });
-          });
-          return id;
-    })
-
-    .then((id) =>{
-
-      var requestSubscribers = connect.getSubscribers(id);
-      requestSubscribers
-      .then((Subscribers)=>{
-        
-        console.log("resSubscribers "+ Subscribers.length);
-        this.setState({
-          Subscribers
-        });
-      })
-      .catch((errorSubscribers) =>{
-        console.log("errorSubscribers", errorSubscribers);
-        this.setState({
-          error: true,
-          isLoaded: true,
-        });
-      });
-      return id;
-})
-*/
