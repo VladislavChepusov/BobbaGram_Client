@@ -5,7 +5,7 @@ import DeleteUserBtn from "../components/DeleteUserBtn";
 
 import { Navigate } from "react-router-dom";
 import { Client, ChangeUser, ChangeUserPassword } from "../LogicApi/ApiModels";
-import { TokenMidelware } from "../LogicApi/RefreshToken";
+import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
 import { RefreshToken } from "../LogicApi/RefreshToken";
 import "../styles/app.css";
 
@@ -16,7 +16,7 @@ export default class UserSetting extends React.Component {
     this.state = {
       error: null,
       errorPass: null,
-      redirect: false,
+      redirecLogin: false,
       success: null,
 
       oldPassword: "",
@@ -108,12 +108,12 @@ export default class UserSetting extends React.Component {
         response
           .then((res) => {
             this.setState({
-              redirect: true,
+              redirecLogin: true,
             });
           })
           .catch((error) => {
             this.setState({
-              redirect: false,
+              redirecLogin: false,
               errorPass: error.response.replace(/"/g, ""),
             });
           });
@@ -124,6 +124,11 @@ export default class UserSetting extends React.Component {
 
   // подгрузка старых данных
   componentDidMount(prevProps) {
+    if (!IsAuthTokens()) {
+      this.setState({
+        redirecLogin: true,
+      });
+    }
     // Рефрешы токенов
     TokenMidelware();
 
@@ -158,7 +163,8 @@ export default class UserSetting extends React.Component {
     return (
       <>
         <Header />
-        {this.state.redirect ? <Navigate push to="/" /> : null}
+        {this.state.redirecLogin ? <Navigate push to="/" /> : null}
+
         <br></br>
 
         <div className="container rounded bg-white mt-5 mb-5">
@@ -211,6 +217,7 @@ export default class UserSetting extends React.Component {
                         type="description"
                         id="description"
                         value={this.state.description}
+                        maxlength="300"
                         onChange={this.handleInputChange}
                         name="description"
                       ></textarea>

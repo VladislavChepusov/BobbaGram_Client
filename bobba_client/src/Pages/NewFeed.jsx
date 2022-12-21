@@ -4,19 +4,17 @@ import Content from "../components/content";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Client } from "../LogicApi/ApiModels";
-import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
+import { TokenMidelware,IsAuthTokens } from "../LogicApi/RefreshToken";
 import Container from "react-bootstrap/Container";
 import "../styles/app.css";
 import NotFoundPage from "./NotFoundPage";
 import { Navigate } from "react-router-dom";
-
 export default class StartPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: false,
       isLoaded: false,
-      redirect: false,
       redirecLogin: false,
 
       Contents: null,
@@ -33,9 +31,9 @@ export default class StartPage extends React.Component {
     // Рефрешы токенов
     TokenMidelware();
     var connect = new Client("https://localhost:7277");
-    var UserData = connect.getSubscriptionPosts();
+    var UserData = connect.getAllPosts();
     UserData.then((res) => {
-      console.log("startPageres", res);
+      console.log("NewFeedPage", res);
       this.setState({
         Contents: res,
         isLoaded: true,
@@ -43,7 +41,7 @@ export default class StartPage extends React.Component {
       });
       return res.id;
     }).catch((error) => {
-      console.log("startPageError", error);
+      console.log("NewFeedPageError", error);
       this.setState({
         error: true,
         isLoaded: true,
@@ -56,18 +54,11 @@ export default class StartPage extends React.Component {
       return (
         <>
           <Header />
-          {this.state.redirecLogin ? <Navigate push to="/" /> : null}
           <NotFoundPage />
         </>
       );
     } else if (!this.state.isLoaded) {
-      return (
-        <div>
-          {" "}
-          {this.state.redirecLogin ? <Navigate push to="/" /> : null}
-          Загрузка....
-        </div>
-      );
+      return <div>Загрузка....</div>;
     } else
       return (
         <>
@@ -80,6 +71,7 @@ export default class StartPage extends React.Component {
                   <div className="Main">
                     {this.state.Contents.map((_item, index) => (
                       <Content
+                        POSTINDEX={index}
                         name={_item.author.name}
                         time={_item.created}
                         contents={_item.contents}

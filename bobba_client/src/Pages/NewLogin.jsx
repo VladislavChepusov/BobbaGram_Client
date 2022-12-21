@@ -4,7 +4,7 @@ import { Nav } from "react-bootstrap";
 import { Client, TokenRequestModel } from "../LogicApi/AuthModels";
 import { Navigate } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
-
+import { IsAuthTokens } from "../LogicApi/RefreshToken";
 export default class NewLogin extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +21,15 @@ export default class NewLogin extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount(prevProps) {
+    if (IsAuthTokens()) {
+      this.setState({
+        redirect: true,
+      });
+    }
+  }
+
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -33,7 +42,6 @@ export default class NewLogin extends React.Component {
 
   handleSubmit(event) {
     //alert('A name was submitted: ' + this.state.login + '|' + this.state.password);
-
     var connect = new Client("https://localhost:7277");
     var data = new TokenRequestModel();
     data.login = this.state.login;

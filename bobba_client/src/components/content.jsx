@@ -36,14 +36,14 @@ export default class Content extends React.Component {
 
           {this.props.contents.length > 1 && (
             <div
-              id="carouselExampleIndicators"
+              id= {"carouselExampleIndicators"+this.props.POSTINDEX}
               class="carousel slide"
               data-ride="carousel"
             >
               <ol class="carousel-indicators">
                 {this.props.contents.map((_item, index) => (
                   <li
-                    data-target="#carouselExampleIndicators"
+                    data-target={"#carouselExampleIndicators"+this.props.POSTINDEX}
                     data-slide-to={index}
                     class="active"
                   ></li>
@@ -75,7 +75,7 @@ export default class Content extends React.Component {
 
               <a
                 class="carousel-control-prev"
-                href="#carouselExampleIndicators"
+                href={"#carouselExampleIndicators"+this.props.POSTINDEX}
                 role="button"
                 data-slide="prev"
               >
@@ -87,7 +87,7 @@ export default class Content extends React.Component {
               </a>
               <a
                 class="carousel-control-next"
-                href="#carouselExampleIndicators"
+                href={"#carouselExampleIndicators"+this.props.POSTINDEX}
                 role="button"
                 data-slide="next"
               >

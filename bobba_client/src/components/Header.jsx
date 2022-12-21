@@ -78,10 +78,12 @@ export default class Header extends React.Component {
                   <i className=" home icon big"></i>
                 </Nav.Link>
 
-                <Nav.Link href="link">
+                <Nav.Link href="/create">
                   <i className="plus square icon big"></i>
                 </Nav.Link>
-                <Nav.Link href="link">
+
+
+                <Nav.Link href="/acute">
                   <i className="star  icon big"></i>
                 </Nav.Link>
 

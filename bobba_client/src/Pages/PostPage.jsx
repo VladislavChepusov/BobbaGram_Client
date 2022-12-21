@@ -3,14 +3,16 @@ import NotFoundPage from "./NotFoundPage";
 import "../styles/app.css";
 import Header from "../components/Header";
 import { Client } from "../LogicApi/ApiModels";
-import { TokenMidelware } from "../LogicApi/RefreshToken";
+import { TokenMidelware,IsAuthTokens } from "../LogicApi/RefreshToken";
 import Container from "react-bootstrap/Container";
 import Content from "../components/content";
+import { Navigate } from "react-router-dom";
 
 export default class PostPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirecLogin:false,
       error: false,
       isLoaded: false,
 
@@ -19,6 +21,14 @@ export default class PostPage extends React.Component {
   }
 
   componentDidMount(prevProps) {
+
+    if (!IsAuthTokens()) {
+      this.setState({
+        redirecLogin: true,
+      });
+    }
+
+
     TokenMidelware();
     var connect = new Client("https://localhost:7277");
     var UserData = connect.getPostById(this.props.id);
@@ -43,15 +53,20 @@ export default class PostPage extends React.Component {
       return (
         <>
           <Header />
+          {this.state.redirecLogin ? <Navigate push to="/" /> : null}
           <NotFoundPage />
         </>
       );
     } else if (!this.state.isLoaded) {
-      return <div>Загрузка....</div>;
+      return <div>
+         {this.state.redirecLogin ? <Navigate push to="/" /> : null}
+        Загрузка....
+        </div>;
     } else {
       return (
         <>
           <Header />
+          {this.state.redirecLogin ? <Navigate push to="/" /> : null}
           <Container>
             <div className="Main">
               <Content

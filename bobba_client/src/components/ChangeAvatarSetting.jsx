@@ -85,7 +85,7 @@ export default class ChangeAvatarSetting extends React.Component {
               type="file"
               ref={this.fileInput}
               className="form-control-file btn-info"
-              accept="image/* ,video/*"
+              accept="image/*"
             />
 
             <br />

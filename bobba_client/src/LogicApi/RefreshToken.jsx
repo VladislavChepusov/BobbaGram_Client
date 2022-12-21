@@ -12,6 +12,18 @@ export const TokenMidelware = () => {
   }
 };
 
+export const IsAuthTokens = () => {
+  var cookies = new Cookies();
+  if (
+    isTokenExpired(cookies.get("accessToken")) &&
+    localStorage.getItem("refreshToken") == null
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
 export const RefreshToken = (refreshtoken) => {
   var connect = new Client("https://localhost:7277");
   var data = new RefreshTokenRequestModel();
