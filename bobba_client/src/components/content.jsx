@@ -23,7 +23,7 @@ export default class Content extends React.Component {
           </div>
 
           {this.props.contents.length == 1 && (
-            <div class="image">
+            <div className="image">
               <img
                 className="Storyimg"
                 src={

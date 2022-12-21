@@ -109,9 +109,14 @@ export default class UserPage extends React.Component {
                       style={{ backgroundColor: "#f8f9fa" }}
                     >
                       <div className="d-flex justify-content-end text-center py-1">
+                        
+                        
                         <div>
+                          < a   className=" nav-link  link-dark"href={"/userposts/" + this.state.username} >
                           <p className="mb-1 h5">{this.state.PostCount}</p>
                           <p className="small text-muted mb-0">Постов</p>
+
+                          </a>
                         </div>
 
                         <SubscriptionUserPanel user_id={this.state.id} />

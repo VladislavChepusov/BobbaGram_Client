@@ -26,8 +26,7 @@ function App() {
 
         <Route path="/user/:name" element={<User />} />
         <Route path="/post/:id" element={<Post/>} />
-
-     
+        <Route path="/userposts/:name" element={<UserPosts/>} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

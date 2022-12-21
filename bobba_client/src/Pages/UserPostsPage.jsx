@@ -29,7 +29,7 @@ export default class StartPage extends React.Component {
     // Рефрешы токенов
     TokenMidelware();
     var connect = new Client("https://localhost:7277");
-    var UserData = connect.getAllPosts();
+    var UserData = connect.getPostByUserName(this.props.name);
     UserData.then((res) => {
       console.log("NewFeedPage", res);
       this.setState({

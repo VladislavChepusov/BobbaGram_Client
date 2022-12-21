@@ -1,7 +1,4 @@
-
 import { Cookies } from "react-cookie";
-
-
 export class Client {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -244,7 +241,6 @@ export class Client {
             headers: {
                 "Accept": "text/plain",
                 "Authorization": cookies.get("accessToken"),
-
             }
         };
 
@@ -748,6 +744,56 @@ export class Client {
     }
 
     protected processGetPostByUserId(response: Response): Promise<PostModel[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PostModel.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<PostModel[]>(null as any);
+    }
+
+    /**
+     * @param userName (optional) 
+     * @return Success
+     */
+    getPostByUserName(userName: string | undefined): Promise<PostModel[]> {
+        let url_ = this.baseUrl + "/api/Post/GetPostByUserName?";
+        if (userName === null)
+            throw new Error("The parameter 'userName' cannot be null.");
+        else if (userName !== undefined)
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+        var cookies = new Cookies();
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain",
+                "Authorization": cookies.get("accessToken"),
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetPostByUserName(_response);
+        });
+    }
+
+    protected processGetPostByUserName(response: Response): Promise<PostModel[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
