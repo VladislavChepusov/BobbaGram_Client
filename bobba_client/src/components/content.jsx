@@ -1,15 +1,14 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import "../styles/app.css";
 import Nav from "react-bootstrap/Nav";
+import DeletePost from "../components/DeletePost"
 export default class Content extends React.Component {
   render(props) {
     return (
       <>
-        <div class="ui card">
-          <div class="content">
-            <div class="right floated meta">
+        <div className="ui card">
+          <div className="content">
+            <div className="right floated meta">
               {this.props.time.getDate() +
                 "/" +
                 (Number(this.props.time.getMonth()) + 1) +
@@ -18,7 +17,7 @@ export default class Content extends React.Component {
             </div>
 
             <Nav.Link href={"/user/" + this.props.name}>
-              <img class="ui avatar image" src={this.props.user} />
+              <img className="ui avatar image" src={this.props.user} />
               {this.props.name}
             </Nav.Link>
           </div>
@@ -36,35 +35,37 @@ export default class Content extends React.Component {
 
           {this.props.contents.length > 1 && (
             <div
-              id= {"carouselExampleIndicators"+this.props.POSTINDEX}
-              class="carousel slide"
+              id={"carouselExampleIndicators" + this.props.POSTINDEX}
+              className="carousel slide"
               data-ride="carousel"
             >
-              <ol class="carousel-indicators">
+              <ol className="carousel-indicators">
                 {this.props.contents.map((_item, index) => (
                   <li
-                    data-target={"#carouselExampleIndicators"+this.props.POSTINDEX}
+                    data-target={
+                      "#carouselExampleIndicators" + this.props.POSTINDEX
+                    }
                     data-slide-to={index}
-                    class="active"
+                    className="active"
                   ></li>
                 ))}
               </ol>
 
-              <div class="carousel-inner">
+              <div className="carousel-inner">
                 {this.props.contents.map(
                   (_item, index) =>
                     (index == 0 && (
-                      <div class="carousel-item active ">
+                      <div className="carousel-item active ">
                         <img
-                          class="d-block w-100"
+                          className="d-block w-100"
                           src={"https://localhost:7277" + _item.contentLink}
                           alt="=слайд"
                         />
                       </div>
                     )) || (
-                      <div class="carousel-item ">
+                      <div className="carousel-item ">
                         <img
-                          class="d-block w-100"
+                          className="d-block w-100"
                           src={"https://localhost:7277" + _item.contentLink}
                           alt="=слайд"
                         />
@@ -74,28 +75,28 @@ export default class Content extends React.Component {
               </div>
 
               <a
-                class="carousel-control-prev"
-                href={"#carouselExampleIndicators"+this.props.POSTINDEX}
+                className="carousel-control-prev"
+                href={"#carouselExampleIndicators" + this.props.POSTINDEX}
                 role="button"
                 data-slide="prev"
               >
                 <span
-                  class="carousel-control-prev-icon"
+                  className="carousel-control-prev-icon"
                   aria-hidden="true"
                 ></span>
-                <span class="sr-only">Previous</span>
+                <span className="sr-only">Previous</span>
               </a>
               <a
-                class="carousel-control-next"
-                href={"#carouselExampleIndicators"+this.props.POSTINDEX}
+                className="carousel-control-next"
+                href={"#carouselExampleIndicators" + this.props.POSTINDEX}
                 role="button"
                 data-slide="next"
               >
                 <span
-                  class="carousel-control-next-icon"
+                  className="carousel-control-next-icon"
                   aria-hidden="true"
                 ></span>
-                <span class="sr-only">Next</span>
+                <span className="sr-only">Next</span>
               </a>
             </div>
           )}
@@ -104,22 +105,34 @@ export default class Content extends React.Component {
             <img className="Storyimg" src={this.props.url} />
           </div>*/}
 
-          <div class="content">
-            <span class="right floated">
-              <i class="bookmark outline icon big"></i>
-            </span>
-            <i class="heart outline icon big"></i>
-            <i class="comment outline icon big"></i>
-            <i class="paper plane outline icon big"></i>
+          <div className="content">
+            {this.props.RealSlimShady == this.props.name && (
+              <DeletePost  PostId = {this.props.PostId}  POSTINDEX  ={this.props.POSTINDEX}  description={this.props.description}  />
+            )}
+
+
+
+
+            {this.props.likes + " liked"}
+
+            <i> </i>
+            <i className="heart outline icon big"> </i>
+            <i className="comment outline icon big"></i>
           </div>
 
-          <div class="content">
-            <i>{this.props.description}</i>
+          <div className="content">
+            <i>
+              <strong>
+                {this.props.name}
+                {": "}
+              </strong>
+              {this.props.description}
+            </i>
           </div>
 
-          <div class="extra content">
-            <div class="ui large transparent left icon input">
-              <i class="heart outline icon"></i>
+          <div className="extra content">
+            <div className="ui large transparent left icon input">
+              <i className="heart outline icon"></i>
               <input type="text" placeholder="Add Comment..." />
             </div>
           </div>

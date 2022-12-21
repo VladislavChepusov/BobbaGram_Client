@@ -1,10 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Content from "./content";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Client } from "../LogicApi/ApiModels";
-import { TokenMidelware } from "../LogicApi/RefreshToken";
+import React, {  } from "react";
 import Container from "react-bootstrap/Container";
 import "../styles/app.css";
 

@@ -1,11 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
-import Content from "../components/content";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
-import Container from "react-bootstrap/Container";
 import "../styles/app.css";
 import NotFoundPage from "./NotFoundPage";
 import { Navigate } from "react-router-dom";
@@ -70,10 +66,11 @@ export default class StartPage extends React.Component {
       );
     } else
       return (
-      
-       <>
-                {this.state.redirecLogin ? <Navigate push to="/" /> : null}
-                {this.state.Contents != null && <ListPost  POSTS = {this.state.Contents} />}
+        <>
+          {this.state.redirecLogin ? <Navigate push to="/" /> : null}
+          {this.state.Contents != null && (
+            <ListPost POSTS={this.state.Contents} />
+          )}
         </>
       );
   }

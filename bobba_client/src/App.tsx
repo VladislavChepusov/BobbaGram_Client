@@ -10,7 +10,7 @@ import NewRegistration from "./Pages/NewRegistration";
 import UserSetting from "./Pages/UserSetting";
 import { User } from "./Pages/User";
 import { Post } from "./Pages/Post";
-
+import { UserPosts } from "./Pages/UserPosts";
 function App() {
   return (
     <Router>
@@ -20,14 +20,14 @@ function App() {
 
         <Route path="/create" element={<CreatePost />} />
 
-
-        
         <Route path="/registration" element={<NewRegistration />} />
         <Route path="/setting" element={<UserSetting />} />
         <Route path="/" element={<NewLogin />} />
 
         <Route path="/user/:name" element={<User />} />
         <Route path="/post/:id" element={<Post/>} />
+
+     
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

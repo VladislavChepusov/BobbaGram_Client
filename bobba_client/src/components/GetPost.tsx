@@ -1,6 +1,6 @@
 import React, { Component, Key, ReactNode } from "react";
 import { Client, PostModel } from "../LogicApi/ApiModels";
-import { withCookies, Cookies } from "react-cookie";
+ 
 interface UserPosts {
   items: any; //replace any with suitable type
   error: any;

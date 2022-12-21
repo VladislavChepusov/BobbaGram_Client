@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
-import Container from "react-bootstrap/Container";
 import "../styles/app.css";
 import NotFoundPage from "./NotFoundPage";
 import UploadImage from "../components/UploadImage";

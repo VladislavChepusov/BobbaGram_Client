@@ -4,7 +4,7 @@ import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
 import "../styles/app.css";
 
-export default class DeleteUserBtn extends React.Component {
+export default class DeletePost extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,20 +13,22 @@ export default class DeleteUserBtn extends React.Component {
       redirect: null,
     };
 
-    this.DeleteMe = this.DeleteMe.bind(this);
+    this.DeletePost = this.DeletePost.bind(this);
   }
-  DeleteMe(event) {
-    TokenMidelware();
 
+  DeletePost(event) {
+    TokenMidelware();
     var connect = new Client("https://localhost:7277");
     connect
-      .deleteMyAccount()
+      .deletePost(this.props.PostId)
       .then((res) => {
+        console.log("delPost rest " + res);
         this.setState({
           redirect: true,
         });
       })
       .catch((error) => {
+        console.log("delPost error " + error);
         this.setState({
           redirect: false,
           error: error.response.replace(/"/g, ""),
@@ -37,22 +39,23 @@ export default class DeleteUserBtn extends React.Component {
   render() {
     return (
       <div>
-        {this.state.redirect ? <Navigate push to="/" /> : null}
+        {this.state.redirect ? <Navigate push to="/acute" /> : null}
 
-        <div className="text-danger">{this.state.error}</div>
-        <button
-          type="button"
-          className="btn btn-danger"
-          data-toggle="modal"
-          data-target="#exampleModalCenter"
-        >
-          Удалить профиль
-        </button>
+        <span className="right floated">
+          <i
+            className="close  icon big"
+            type="button"
+            data-toggle="modal"
+            data-target={"#exampleModalCenter" + this.props.POSTINDEX}
+          >
+            {" "}
+          </i>
+        </span>
 
         <div
           className="modal fade"
-          id="exampleModalCenter"
-          tabIndex="-1"
+          id={"exampleModalCenter" + this.props.POSTINDEX}
+          tabIndex={this.props.POSTINDEX}
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true"
@@ -60,8 +63,11 @@ export default class DeleteUserBtn extends React.Component {
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLongTitle">
-                  Удаление профиля
+                <h5
+                  className="modal-title"
+                  id={"exampleModalLongTitle" + this.props.POSTINDEX}
+                >
+                  Удаление поста ||{this.props.description}
                 </h5>
                 <button
                   type="button"
@@ -73,7 +79,7 @@ export default class DeleteUserBtn extends React.Component {
                 </button>
               </div>
               <div className="modal-body">
-                Вы уверены,что хотите удалить аккаунт на BobbaGram?
+                Вы уверены,что хотите удалить данный пост?
               </div>
               <div className="modal-footer">
                 <button
@@ -87,7 +93,7 @@ export default class DeleteUserBtn extends React.Component {
                   type="button"
                   className="btn btn-danger"
                   data-dismiss="modal"
-                  onClick={this.DeleteMe}
+                  onClick={this.DeletePost}
                 >
                   Да
                 </button>

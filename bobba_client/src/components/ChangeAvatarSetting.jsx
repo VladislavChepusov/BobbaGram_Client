@@ -1,7 +1,5 @@
 import React from "react";
-import Header from "../components/Header";
-import { Navigate } from "react-router-dom";
-import { Client, FileParameter } from "../LogicApi/ApiModels";
+import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
 import "../styles/app.css";
 

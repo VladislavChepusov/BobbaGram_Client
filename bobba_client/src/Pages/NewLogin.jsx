@@ -3,7 +3,7 @@ import "../styles/app.css";
 import { Nav } from "react-bootstrap";
 import { Client, TokenRequestModel } from "../LogicApi/AuthModels";
 import { Navigate } from "react-router-dom";
-import { withCookies, Cookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 import { IsAuthTokens } from "../LogicApi/RefreshToken";
 export default class NewLogin extends React.Component {
   constructor(props) {
@@ -22,7 +22,6 @@ export default class NewLogin extends React.Component {
   }
 
   componentDidMount(prevProps) {
-    
     if (IsAuthTokens()) {
       this.setState({
         redirect: true,
@@ -31,7 +30,6 @@ export default class NewLogin extends React.Component {
 
     localStorage.clear();
   }
-
 
   handleInputChange(event) {
     const target = event.target;

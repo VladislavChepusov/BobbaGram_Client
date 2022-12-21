@@ -3,13 +3,9 @@ import Header from "../components/Header";
 import Content from "../components/content";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Client } from "../LogicApi/ApiModels";
-import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
 import Container from "react-bootstrap/Container";
 import "../styles/app.css";
-import NotFoundPage from "./NotFoundPage";
-import { Navigate } from "react-router-dom";
-
+import { UserNameInToken } from "../LogicApi/Tokens";
 export default class ListPost extends React.Component {
   constructor(props) {
     super(props);
@@ -45,8 +41,10 @@ export default class ListPost extends React.Component {
                           ? "https://localhost:7277" + _item.author.avatarLink
                           : "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
                       }
-                      likes="5k liked"
+                      likes={_item.likesCount}
                       description={_item.description}
+                      PostId = {_item.id}
+                      RealSlimShady = { UserNameInToken()}
                     />
                   ))}
                 </div>

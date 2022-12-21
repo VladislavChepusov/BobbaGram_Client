@@ -11,7 +11,8 @@ export default class NotFoundPage extends React.Component {
               <h1 className="display-1 fw-bold">404</h1>
               <p className="fs-3">
                 {" "}
-                <span className="text-danger">ууупсс!</span> Страница не найдена! :с
+                <span className="text-danger">ууупсс!</span> Страница не
+                найдена! :с
               </p>
               <p className="lead">Страница, которую вы ищете, не существует</p>
               <a href="/" className="btn btn-primary">

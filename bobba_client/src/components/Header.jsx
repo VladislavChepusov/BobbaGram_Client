@@ -38,7 +38,6 @@ export default class Header extends React.Component {
   }
 
   _LogOut(e) {
-
     //localStorage.setItem('refreshToken', null);
     localStorage.removeItem("refreshToken");
     localStorage.clear();
@@ -51,9 +50,6 @@ export default class Header extends React.Component {
       path: "/",
       expires: date,
     });
-
-     
-   
   }
 
   render() {
@@ -87,7 +83,6 @@ export default class Header extends React.Component {
                 <Nav.Link href="/create">
                   <i className="plus square icon big"></i>
                 </Nav.Link>
-
 
                 <Nav.Link href="/acute">
                   <i className="star  icon big"></i>
