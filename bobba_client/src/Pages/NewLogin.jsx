@@ -22,11 +22,14 @@ export default class NewLogin extends React.Component {
   }
 
   componentDidMount(prevProps) {
+    
     if (IsAuthTokens()) {
       this.setState({
         redirect: true,
       });
     }
+
+    localStorage.clear();
   }
 
 

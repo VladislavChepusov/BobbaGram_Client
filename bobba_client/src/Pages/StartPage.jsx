@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import "../styles/app.css";
 import NotFoundPage from "./NotFoundPage";
 import { Navigate } from "react-router-dom";
-
+import ListPost from "../Pages/ListPost";
 export default class StartPage extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,6 @@ export default class StartPage extends React.Component {
       isLoaded: false,
       redirect: false,
       redirecLogin: false,
-
       Contents: null,
     };
   }
@@ -32,6 +31,7 @@ export default class StartPage extends React.Component {
     }
     // Рефрешы токенов
     TokenMidelware();
+
     var connect = new Client("https://localhost:7277");
     var UserData = connect.getSubscriptionPosts();
     UserData.then((res) => {
@@ -70,33 +70,10 @@ export default class StartPage extends React.Component {
       );
     } else
       return (
-        <>
-          <Header />
-          {this.state.redirecLogin ? <Navigate push to="/" /> : null}
-          <Row>
-            <Col>
-              <Container>
-                <Container>
-                  <div className="Main">
-                    {this.state.Contents.map((_item, index) => (
-                      <Content
-                        name={_item.author.name}
-                        time={_item.created}
-                        contents={_item.contents}
-                        user={
-                          _item.author.avatarLink !== null
-                            ? "https://localhost:7277" + _item.author.avatarLink
-                            : "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
-                        }
-                        likes="5k liked"
-                        description={_item.description}
-                      />
-                    ))}
-                  </div>
-                </Container>
-              </Container>
-            </Col>
-          </Row>
+      
+       <>
+                {this.state.redirecLogin ? <Navigate push to="/" /> : null}
+                {this.state.Contents != null && <ListPost  POSTS = {this.state.Contents} />}
         </>
       );
   }

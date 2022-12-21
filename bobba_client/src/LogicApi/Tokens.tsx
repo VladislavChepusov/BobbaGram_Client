@@ -2,7 +2,7 @@ import { Cookies } from "react-cookie";
 
 export interface IAuthTokenInfo {
   exp: number;
-  iat: number;
+  nbf: number;
   login: string;
   sessionId: string;
   name: string;
@@ -20,9 +20,9 @@ export const isTokenExpired = (token: string | null): boolean => {
     const tokenInfo = token.split(".")[1];
     const tokenInfoDecoded = window.atob(tokenInfo);
 
-    const { exp, iat }: IAuthTokenInfo = JSON.parse(tokenInfoDecoded);
+    const { exp, nbf }: IAuthTokenInfo = JSON.parse(tokenInfoDecoded);
     const tokenLeftTime = exp - getUnixTime();
-    const minLifeTimeForUpdate = (exp - iat) * LIFE_TIME_TO_UPDATE_MULTIPLIER;
+    const minLifeTimeForUpdate = (exp - nbf) * LIFE_TIME_TO_UPDATE_MULTIPLIER;
 
     return tokenLeftTime < minLifeTimeForUpdate;
   } catch (e) {

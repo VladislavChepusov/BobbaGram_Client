@@ -38,6 +38,10 @@ export default class Header extends React.Component {
   }
 
   _LogOut(e) {
+
+    //localStorage.setItem('refreshToken', null);
+    localStorage.removeItem("refreshToken");
+    localStorage.clear();
     var connect = new Client("https://localhost:7277");
     connect.logOut();
     var cookies = new Cookies();
@@ -47,7 +51,9 @@ export default class Header extends React.Component {
       path: "/",
       expires: date,
     });
-    localStorage.removeItem("refreshToken");
+
+     
+   
   }
 
   render() {
