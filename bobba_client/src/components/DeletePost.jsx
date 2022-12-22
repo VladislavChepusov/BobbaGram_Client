@@ -22,7 +22,7 @@ export default class DeletePost extends React.Component {
     connect
       .deletePost(this.props.PostId)
       .then((res) => {
-        console.log("delPost rest " + res);
+       // console.log("delPost rest " + res);
         this.setState({
           redirect: true,
         });
@@ -67,7 +67,7 @@ export default class DeletePost extends React.Component {
                   className="modal-title"
                   id={"exampleModalLongTitle" + this.props.POSTINDEX}
                 >
-                  Удаление поста ||{this.props.description}
+                  Удаление поста  
                 </h5>
                 <button
                   type="button"

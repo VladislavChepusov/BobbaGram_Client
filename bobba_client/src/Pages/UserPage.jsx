@@ -145,7 +145,7 @@ export default class UserPage extends React.Component {
                             {this.state.description}
                           </p>
                           <p className="font-italic mb-1">
-                            Автор цифрового контента
+                            
                           </p>
                         </div>
                       </div>

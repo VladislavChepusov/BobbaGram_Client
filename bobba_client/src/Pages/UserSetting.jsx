@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import ChangeAvatarSetting from "../components/ChangeAvatarSetting";
 import DeleteUserBtn from "../components/DeleteUserBtn";
-
+import { Cookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 import { Client, ChangeUser, ChangeUserPassword } from "../LogicApi/ApiModels";
 import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
@@ -107,6 +107,16 @@ export default class UserSetting extends React.Component {
         var response = connect.changeMyPassword(dataPass);
         response
           .then((res) => {
+            localStorage.removeItem("refreshToken");
+    localStorage.clear();
+   
+    var cookies = new Cookies();
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+    cookies.set("accessToken", "Удален ", {
+      path: "/",
+      expires: date,
+    });
             this.setState({
               redirecLogin: true,
             });

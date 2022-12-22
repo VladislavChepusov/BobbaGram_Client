@@ -1,25 +1,22 @@
 import React from "react";
 import "../styles/app.css";
 import Nav from "react-bootstrap/Nav";
-import DeletePost from "../components/DeletePost"
-import LikePost from "../components/LikePost"
+import DeletePost from "../components/DeletePost";
+import LikePost from "../components/LikePost";
 export default class Content extends React.Component {
-
-
-
   render(props) {
     return (
       <>
         <div className="ui card">
           <div className="content">
-          <Nav.Link href={"/post/" + this.props.PostId}>
-            <div className="right floated meta" >
-              {this.props.time.getDate() +
-                "/" +
-                (Number(this.props.time.getMonth()) + 1) +
-                "/" +
-                this.props.time.getFullYear()}
-            </div>
+            <Nav.Link href={"/post/" + this.props.PostId}>
+              <div className="right floated meta">
+                {this.props.time.getDate() +
+                  "/" +
+                  (Number(this.props.time.getMonth()) + 1) +
+                  "/" +
+                  this.props.time.getFullYear()}
+              </div>
             </Nav.Link>
             <Nav.Link href={"/user/" + this.props.name}>
               <img className="ui avatar image" src={this.props.user} />
@@ -112,21 +109,20 @@ export default class Content extends React.Component {
 
           <div className="content">
             {this.props.RealSlimShady == this.props.name && (
-              <DeletePost  PostId = {this.props.PostId}  POSTINDEX  ={this.props.POSTINDEX}  description={this.props.description}  />
+              <DeletePost
+                PostId={this.props.PostId}
+                POSTINDEX={this.props.POSTINDEX}
+                description={this.props.description}
+              />
             )}
 
-
-
-{/* {this.props.likes + " liked"}
+            {/* {this.props.likes + " liked"}
             <i> </i>
             <i className="heart outline icon big"> </i>
             <i className="heart outline icon big" style={{color:this.state.color}} onClick ={this.rever}> </i>*/}
-            
-            
-            
-            
-            <LikePost  likes={this.props.likes}/>
-            
+
+            <LikePost likes={this.props.likes} PostId={this.props.PostId} />
+
             <i className="comment outline icon big"></i>
           </div>
 
@@ -140,8 +136,7 @@ export default class Content extends React.Component {
             </i>
           </div>
 
-
-{/*
+          {/*
            {this.props.comments.length > 0  && ( <div className="content">
             <i>
               <strong>
@@ -153,7 +148,6 @@ export default class Content extends React.Component {
           </div>)} 
 
           */}
-          
 
           <div className="extra content">
             <div className="ui large transparent left icon input">

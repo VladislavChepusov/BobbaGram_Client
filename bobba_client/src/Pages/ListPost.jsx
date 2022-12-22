@@ -14,6 +14,14 @@ export default class ListPost extends React.Component {
     };
   }
 
+  componentDidUpdate() {
+    if (this.state.Contents !== this.props.POSTS) {
+      this.setState({
+        Contents: this.props.POSTS,
+      });
+    }
+  }
+
   // подгрузка данных
   componentDidMount(prevProps) {
     this.setState({
@@ -43,9 +51,9 @@ export default class ListPost extends React.Component {
                       }
                       likes={_item.likesCount}
                       description={_item.description}
-                      PostId = {_item.id}
-                      RealSlimShady = { UserNameInToken()}
-                      comments = {_item.comments}
+                      PostId={_item.id}
+                      RealSlimShady={UserNameInToken()}
+                      comments={_item.comments}
                     />
                   ))}
                 </div>

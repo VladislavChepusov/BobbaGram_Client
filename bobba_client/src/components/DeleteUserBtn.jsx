@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
 import "../styles/app.css";
+import { Cookies } from "react-cookie";
 
 export default class DeleteUserBtn extends React.Component {
   constructor(props) {
@@ -32,6 +33,17 @@ export default class DeleteUserBtn extends React.Component {
           error: error.response.replace(/"/g, ""),
         });
       });
+
+    localStorage.removeItem("refreshToken");
+    localStorage.clear();
+
+    var cookies = new Cookies();
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+    cookies.set("accessToken", "Удален ", {
+      path: "/",
+      expires: date,
+    });
   }
 
   render() {
