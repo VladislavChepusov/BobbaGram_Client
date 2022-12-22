@@ -45,6 +45,7 @@ export default class ListPost extends React.Component {
                       description={_item.description}
                       PostId = {_item.id}
                       RealSlimShady = { UserNameInToken()}
+                      comments = {_item.comments}
                     />
                   ))}
                 </div>

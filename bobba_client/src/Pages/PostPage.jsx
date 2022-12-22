@@ -7,7 +7,7 @@ import { TokenMidelware, IsAuthTokens } from "../LogicApi/RefreshToken";
 import Container from "react-bootstrap/Container";
 import Content from "../components/content";
 import { Navigate } from "react-router-dom";
-
+import { UserNameInToken } from "../LogicApi/Tokens";
 export default class PostPage extends React.Component {
   constructor(props) {
     super(props);
@@ -67,9 +67,13 @@ export default class PostPage extends React.Component {
         <>
           <Header />
           {this.state.redirecLogin ? <Navigate push to="/" /> : null}
+
+
+          
           <Container>
             <div className="Main">
               <Content
+               POSTINDEX={1}
                 name={this.state.post.author.name}
                 time={this.state.post.created}
                 contents={this.state.post.contents}
@@ -79,8 +83,11 @@ export default class PostPage extends React.Component {
                       this.state.post.author.avatarLink
                     : "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
                 }
-                likes="5k liked"
+                likes={this.state.post.likesCount}
                 description={this.state.post.description}
+                PostId = {this.state.post.id}
+                RealSlimShady = { UserNameInToken()}
+                comments = {this.state.post.comments}
               />
             </div>
           </Container>

@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/app.css";
 import { Client } from "../LogicApi/ApiModels";
 import { TokenMidelware } from "../LogicApi/RefreshToken";
-
+import { UserNameInToken } from "../LogicApi/Tokens";
 export default class SubscribersUserPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -11,14 +11,53 @@ export default class SubscribersUserPanel extends React.Component {
       error: false,
       isLoaded: false,
 
+      IsMe: false,
+      IsSubs: false,
       Subscribers: [],
     };
+
+    this._unsubscribe = this._unsubscribe.bind(this);
+    this._subscribe = this._subscribe.bind(this);
+  }
+
+  _unsubscribe() {
+    var connect = new Client("https://localhost:7277");
+    connect
+      .unSubscribe({
+        subUserId: this.props.user_id,
+      })
+      .then((res) => {
+        window.location.href = "/user/" + this.props.user_name;
+      })
+      .catch((error) => {
+        console.log("unSubscribe error " + error);
+      });
+  }
+  _subscribe() {
+    var connect = new Client("https://localhost:7277");
+    connect
+      .subscribe({
+        subUserId: this.props.user_id,
+      })
+      .then((res) => {
+        window.location.href = "/user/" + this.props.user_name;
+      })
+      .catch((error) => {
+        console.log("_subscribe error " + error);
+      });
   }
 
   // подгрузка данных
   componentDidMount(prevProps) {
     // Рефрешы токенов
     TokenMidelware();
+    var RealSlimShady = UserNameInToken();
+    if (this.props.user_name === RealSlimShady) {
+      this.setState({
+        IsMe: true,
+      });
+    }
+
     var connect = new Client("https://localhost:7277");
     var requestSubscribers = connect.getSubscribers(this.props.user_id);
     requestSubscribers
@@ -29,6 +68,14 @@ export default class SubscribersUserPanel extends React.Component {
           isLoaded: true,
           error: false,
         });
+
+        Subscribers.map(
+          (_item) =>
+            _item.user.name === RealSlimShady &&
+            this.setState({
+              IsSubs: true,
+            })
+        );
       })
       .catch((errorSubscribers) => {
         console.log("errorSubscribers", errorSubscribers);
@@ -54,7 +101,29 @@ export default class SubscribersUserPanel extends React.Component {
     } else {
       return (
         <>
-          {" "}
+          {!this.state.IsMe && (
+            <div className="container ">
+              {(!this.state.IsSubs && (
+                <button
+                  type="button"
+                  className="btn btn-primary btn-rounded float-left"
+                  onClick={this._subscribe}
+                >
+                  {" "}
+                  Подписаться
+                </button>
+              )) || (
+                <button
+                  type="button"
+                  className="btn btn-primary btn-rounded float-left"
+                  onClick={this._unsubscribe}
+                >
+                  {" "}
+                  Отписаться
+                </button>
+              )}
+            </div>
+          )}{" "}
           <div data-toggle="modal" data-target="#exampleModalLong2">
             <p className="mb-1 h5">{this.state.Subscribers.length}</p>
             <p className="small text-muted mb-0">Подписчиков</p>

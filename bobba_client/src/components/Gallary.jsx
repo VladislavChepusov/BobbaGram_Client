@@ -7,8 +7,8 @@ export default class Gallary extends React.Component {
           <p className="lead fw-normal mb-0">Пользовательские посты</p>
 
           <p className="mb-0">
-            <a href="#!" className="text-muted">
-              Show all
+            <a href={"/userposts/"+this.props.name} className="text-muted">
+              Показать все
             </a>
           </p>
         </div>

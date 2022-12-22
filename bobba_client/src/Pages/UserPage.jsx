@@ -91,7 +91,7 @@ export default class UserPage extends React.Component {
                         <img
                           className="rounded-circle img-fluid img-thumbnail mt-4 mb-2"
                           //width="150px"
-                          // height="150px"
+
                           style={{ width: "150px", height: "150px", zIndex: 1 }}
                           //  className="rounded-circle img-fluid img-thumbnail mt-4 mb-2"
                           // style={{ width: "150px", height: "150px", zIndex: 1 }}
@@ -109,18 +109,21 @@ export default class UserPage extends React.Component {
                       style={{ backgroundColor: "#f8f9fa" }}
                     >
                       <div className="d-flex justify-content-end text-center py-1">
-                        
-                        
-                        <div>
-                          < a   className=" nav-link  link-dark"href={"/userposts/" + this.state.username} >
-                          <p className="mb-1 h5">{this.state.PostCount}</p>
-                          <p className="small text-muted mb-0">Постов</p>
+                        <SubscribersUserPanel
+                          user_id={this.state.id}
+                          user_name={this.state.username}
+                        />
+                        <SubscriptionUserPanel user_id={this.state.id} />
 
+                        <div>
+                          <a
+                            className=" nav-link  link-dark"
+                            href={"/userposts/" + this.state.username}
+                          >
+                            <p className="mb-1 h5">{this.state.PostCount}</p>
+                            <p className="small text-muted mb-0">Постов</p>
                           </a>
                         </div>
-
-                        <SubscriptionUserPanel user_id={this.state.id} />
-                        <SubscribersUserPanel user_id={this.state.id} />
 
                         {/*    <div>
                           <p className="mb-1 h5">
@@ -147,7 +150,7 @@ export default class UserPage extends React.Component {
                         </div>
                       </div>
 
-                      <Gallary />
+                      <Gallary name={this.state.username} />
                     </div>
                   </div>
                 </div>
