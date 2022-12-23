@@ -23,7 +23,7 @@ export default class SubscriptionUserPanel extends React.Component {
     var requestSubscriptions = connect.getSubscription(this.props.user_id);
     requestSubscriptions
       .then((Subscriptions) => {
-        console.log("resSubscriptions " + Subscriptions.length);
+        //console.log("resSubscriptions " + Subscriptions.length);
         this.setState({
           Subscriptions,
           isLoaded: true,

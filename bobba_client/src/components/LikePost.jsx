@@ -19,15 +19,16 @@ export default class LikePost extends React.Component {
 
   // Клик лайка будет тут
   rever(event) {
-    var connect = new Client("https://localhost:7277"); 
+    var connect = new Client("https://localhost:7277");
     if (this.state.ILiked) {
       //  не лайкнуть пост
-      connect.deleteLikeFromPost({
-        entityId:this.props.PostId
-      })
-      .catch((er)=>{
-        console.log("error deleteLikeFromPost" +er)
-      })
+      connect
+        .deleteLikeFromPost({
+          entityId: this.props.PostId,
+        })
+        .catch((er) => {
+          console.log("error deleteLikeFromPost" + er);
+        });
 
       this.setState({
         color: "black",
@@ -35,12 +36,13 @@ export default class LikePost extends React.Component {
       });
     } else {
       // лайкнуть пост
-      connect.likeThePost({
-        entityId:this.props.PostId
-      })
-      .catch((er)=>{
-        console.log("error likeThePost" +er)
-      })
+      connect
+        .likeThePost({
+          entityId: this.props.PostId,
+        })
+        .catch((er) => {
+          console.log("error likeThePost" + er);
+        });
       this.setState({
         color: "red",
         ILiked: true,
@@ -119,7 +121,10 @@ export default class LikePost extends React.Component {
       //If this.state.render == true, which is set to true by the timer.
       renderContainer = (
         <>
-          <i data-toggle="modal" data-target={"#exampleModalLong"+this.props.PostId}>
+          <i
+            data-toggle="modal"
+            data-target={"#exampleModalLong" + this.props.PostId}
+          >
             {" "}
             {this.props.likes + " liked"}{" "}
           </i>
@@ -134,16 +139,19 @@ export default class LikePost extends React.Component {
 
           <div
             className="modal fade"
-            id={"exampleModalLong"+this.props.PostId}
-            tabIndex={"1" +this.props.PostId}
+            id={"exampleModalLong" + this.props.PostId}
+            tabIndex={"1" + this.props.PostId}
             role="dialog"
-            aria-labelledby={"exampleModalLongTitle"+this.props.PostId}
+            aria-labelledby={"exampleModalLongTitle" + this.props.PostId}
             aria-hidden="true"
           >
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title" id={"exampleModalLongTitle"+this.props.PostId}>
+                  <h5
+                    className="modal-title"
+                    id={"exampleModalLongTitle" + this.props.PostId}
+                  >
                     Лайкнули
                   </h5>
 

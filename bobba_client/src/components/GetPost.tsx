@@ -1,6 +1,6 @@
 import React, { Component, Key, ReactNode } from "react";
 import { Client, PostModel } from "../LogicApi/ApiModels";
- 
+
 interface UserPosts {
   items: any; //replace any with suitable type
   error: any;
@@ -33,7 +33,7 @@ export default class TestData2 extends Component<{}, UserPosts> {
     var test2 = connect.getCurrentUser();
     test2
       .then((res) => {
-        console.log("user ok", res);
+        //console.log("user ok", res);
       })
       .catch((error) => {
         console.log("usererror", error);

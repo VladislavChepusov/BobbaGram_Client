@@ -28,7 +28,7 @@ export default class StartPage extends React.Component {
     var UserData = connect.getSubscriptionPosts(skip, 5);
     var oldCont = this.state.Contents;
     UserData.then((res) => {
-      console.log("oldCont", oldCont);
+      //console.log("oldCont", oldCont);
       this.setState({
         Contents: oldCont.concat(res),
         countPost: skip + 5,
@@ -63,7 +63,7 @@ export default class StartPage extends React.Component {
     var connect = new Client("https://localhost:7277");
     var UserData = connect.getSubscriptionPosts(0, 5);
     UserData.then((res) => {
-      console.log("startPageres", res);
+      //console.log("startPageres", res);
       this.setState({
         Contents: res,
         isLoaded: true,
@@ -100,8 +100,7 @@ export default class StartPage extends React.Component {
       return (
         <>
           {this.state.redirecLogin ? <Navigate push to="/" /> : null}
-          
-          
+
           {this.state.Contents != null && (
             <ListPost POSTS={this.state.Contents} />
           )}

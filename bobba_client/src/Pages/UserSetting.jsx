@@ -108,15 +108,15 @@ export default class UserSetting extends React.Component {
         response
           .then((res) => {
             localStorage.removeItem("refreshToken");
-    localStorage.clear();
-   
-    var cookies = new Cookies();
-    var date = new Date();
-    date.setDate(date.getDate() - 1);
-    cookies.set("accessToken", "Удален ", {
-      path: "/",
-      expires: date,
-    });
+            localStorage.clear();
+
+            var cookies = new Cookies();
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+            cookies.set("accessToken", "Удален ", {
+              path: "/",
+              expires: date,
+            });
             this.setState({
               redirecLogin: true,
             });

@@ -31,7 +31,7 @@ export default class StartPage extends React.Component {
     var connect = new Client("https://localhost:7277");
     var UserData = connect.getPostByUserName(this.props.name);
     UserData.then((res) => {
-      console.log("NewFeedPage", res);
+      //console.log("NewFeedPage", res);
       this.setState({
         Contents: res,
         isLoaded: true,

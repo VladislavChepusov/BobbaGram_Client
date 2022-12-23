@@ -5,7 +5,7 @@ import { isTokenExpired } from "./Tokens";
 export const TokenMidelware = () => {
   var cookies = new Cookies();
   if (isTokenExpired(cookies.get("accessToken"))) {
-    alert("токен не валиден");
+    //alert("токен не валиден");
     RefreshToken(localStorage.getItem("refreshToken"));
   } else {
     //alert("токен валиден")

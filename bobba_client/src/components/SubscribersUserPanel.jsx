@@ -62,7 +62,7 @@ export default class SubscribersUserPanel extends React.Component {
     var requestSubscribers = connect.getSubscribers(this.props.user_id);
     requestSubscribers
       .then((Subscribers) => {
-        console.log("resSubscribers " + Subscribers.length);
+        //console.log("resSubscribers " + Subscribers.length);
         this.setState({
           Subscribers,
           isLoaded: true,

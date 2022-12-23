@@ -144,9 +144,7 @@ export default class UserPage extends React.Component {
                           <p className="font-italic mb-1">
                             {this.state.description}
                           </p>
-                          <p className="font-italic mb-1">
-                            
-                          </p>
+                          <p className="font-italic mb-1"></p>
                         </div>
                       </div>
 

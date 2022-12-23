@@ -14,7 +14,7 @@ export default class CreatePost extends React.Component {
     super(props);
     this.state = {
       error: false,
-      isLoaded: true, // исправить на false
+      isLoaded: true,
       redirecLogin: false,
       redirectAcute: false,
 
@@ -75,19 +75,19 @@ export default class CreatePost extends React.Component {
 
       var DowloadData = connect.uploadFiles(MassFiles);
       DowloadData.then((res) => {
-        console.log("res", res);
+        //console.log("res", res);
         connect
           .createPost({
             description: this.state.description,
             contents: res,
           })
           .then((res2) => {
-            console.log("пост создался" + res2);
+            //console.log("пост создался" + res2);
             this.setState({
               redirectAcute: true,
             });
           })
-          .carch((error2) => {
+          .catch((error2) => {
             console.log("Ошибка создания потса" + error2);
           });
       }).catch((error) => {

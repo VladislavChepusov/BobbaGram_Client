@@ -15,43 +15,42 @@ export default class NewFeed extends React.Component {
       isLoaded: false,
       redirecLogin: false,
 
-      countPost:5,
+      countPost: 5,
       Contents: null,
-     
     };
     this.NextData = this.NextData.bind(this);
   }
 
-  NextData(event){
-     // Рефрешы токенов
-     TokenMidelware();
-     var connect = new Client("https://localhost:7277");
-     var skip = this.state.countPost;
-     var UserData = connect.getAllPosts(skip,5);
-     var oldCont = this.state.Contents
-     UserData.then((res) => {
-       console.log("oldCont", oldCont);
-       this.setState({
-         Contents: oldCont.concat(res),
-         countPost: skip + 5,
-       
-         isLoaded: true,
-         error: false,
-       });
-       return res.id;
-     })
-     //.then( window.location.reload())
-     .catch((error) => {
-       console.log("NewFeedPageError", error);
-       this.setState({
-         error: true,
-         isLoaded: true,
-       });
-     });
+  NextData(event) {
+    // Рефрешы токенов
+    TokenMidelware();
+    var connect = new Client("https://localhost:7277");
+    var skip = this.state.countPost;
+    var UserData = connect.getAllPosts(skip, 5);
+    var oldCont = this.state.Contents;
+    UserData.then((res) => {
+      //console.log("oldCont", oldCont);
+      this.setState({
+        Contents: oldCont.concat(res),
+        countPost: skip + 5,
 
-     event.preventDefault();
+        isLoaded: true,
+        error: false,
+      });
+      return res.id;
+    })
+      //.then( window.location.reload())
+      .catch((error) => {
+        console.log("NewFeedPageError", error);
+        this.setState({
+          error: true,
+          isLoaded: true,
+        });
+      });
+
+    event.preventDefault();
   }
- 
+
   // подгрузка данных
   componentDidMount(prevProps) {
     if (!IsAuthTokens()) {
@@ -62,7 +61,7 @@ export default class NewFeed extends React.Component {
     // Рефрешы токенов
     TokenMidelware();
     var connect = new Client("https://localhost:7277");
-    var UserData = connect.getAllPosts(0,5);
+    var UserData = connect.getAllPosts(0, 5);
     UserData.then((res) => {
       //console.log("NewFeedPage", res);
       this.setState({
@@ -98,12 +97,11 @@ export default class NewFeed extends React.Component {
           {this.state.Contents != null && (
             <ListPost POSTS={this.state.Contents} />
           )}
-          
 
           {this.state.Contents.length > 4 && (
-            
             <div class="container px-4">
-              <br></br><br></br>
+              <br></br>
+              <br></br>
               <div class="row gx-5">
                 <button
                   type="submit"

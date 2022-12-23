@@ -31,7 +31,7 @@ export default class PostPage extends React.Component {
     var connect = new Client("https://localhost:7277");
     var UserData = connect.getPostById(this.props.id);
     UserData.then((res) => {
-      console.log("Post", res);
+      //console.log("Post", res);
       this.setState({
         post: res,
         isLoaded: true,
@@ -68,12 +68,10 @@ export default class PostPage extends React.Component {
           <Header />
           {this.state.redirecLogin ? <Navigate push to="/" /> : null}
 
-
-          
           <Container>
             <div className="Main">
               <Content
-               POSTINDEX={1}
+                POSTINDEX={1}
                 name={this.state.post.author.name}
                 time={this.state.post.created}
                 contents={this.state.post.contents}
@@ -85,9 +83,9 @@ export default class PostPage extends React.Component {
                 }
                 likes={this.state.post.likesCount}
                 description={this.state.post.description}
-                PostId = {this.state.post.id}
-                RealSlimShady = { UserNameInToken()}
-                comments = {this.state.post.comments}
+                PostId={this.state.post.id}
+                RealSlimShady={UserNameInToken()}
+                comments={this.state.post.comments}
               />
             </div>
           </Container>

@@ -31,7 +31,7 @@ export default class ChangeAvatarSetting extends React.Component {
         connect
           .addAvatarToUser(res[0])
           .then((res2) => {
-            console.log("res2", res2);
+            //console.log("res2", res2);
             this.setState({
               success: "Выполненно успешно!",
               error: null,
